@@ -3,7 +3,7 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-RunWait, _pack1.ahk
+RunWait, _pack5.ahk
 
 Loop, 0 {
   Sleep, 1024
@@ -15,5 +15,4 @@ Send, {Enter}
 
 Sleep, 30000
 Send, {Enter}
-
 

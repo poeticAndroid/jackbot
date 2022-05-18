@@ -6,6 +6,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CoordMode, Mouse, Client
 
 WinClose, The Jackbox Party Pack
+Sleep, 1024
 Run, steam://rungameid/1005300
 While (!WinActive("The Jackbox Party Pack")) {
   Sleep, 1024
