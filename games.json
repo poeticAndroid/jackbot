@@ -1,0 +1,162 @@
+{
+  "bidi": {
+    "name": "bidiots",
+    "title": "Bidiots"
+  },
+  "blat": {
+    "name": "blatherround",
+    "title": "Blather ‘Round"
+  },
+  "bomb": {
+    "name": "bombcorp",
+    "title": "Bomb Corp."
+  },
+  "brac": {
+    "name": "bracketeering",
+    "title": "Bracketeering"
+  },
+  "cham": {
+    "name": "champdup",
+    "title": "Champ’d Up"
+  },
+  "civi": {
+    "name": "civicdoodle",
+    "title": "Civic Doodle"
+  },
+  "dict": {
+    "name": "dictionarium",
+    "title": "Dictionarium"
+  },
+  "draw": {
+    "name": "drawful",
+    "title": "Drawful"
+  },
+  "dran": {
+    "name": "drawfulanimate",
+    "title": "Drawful Animate"
+  },
+  "earw": {
+    "name": "earwax",
+    "title": "Earwax"
+  },
+  "faki": {
+    "name": "fakinit",
+    "title": "Fakin' It"
+  },
+  "fib2": {
+    "name": "fibbage2",
+    "title": "Fibbage 2"
+  },
+  "fib3": {
+    "name": "fibbage3",
+    "title": "Fibbage 3"
+  },
+  "fixl": {
+    "name": "fibbagexl",
+    "title": "Fibbage XL"
+  },
+  "gues": {
+    "name": "guesspionage",
+    "title": "Guesspionage"
+  },
+  "jobj": {
+    "name": "jobjob",
+    "title": "Job Job"
+  },
+  "joke": {
+    "name": "jokeboat",
+    "title": "Joke Boat"
+  },
+  "lies": {
+    "name": "lieswatter",
+    "title": "Lie Swatter"
+  },
+  "madv": {
+    "name": "madversecity",
+    "title": "Mad Verse City"
+  },
+  "mons": {
+    "name": "monsterseekingmonster",
+    "title": "Monster Seeking Monster"
+  },
+  "pate": {
+    "name": "patentlystupid",
+    "title": "Patently Stupid"
+  },
+  "push": {
+    "name": "pushthebutton",
+    "title": "Push The Button"
+  },
+  "qui2": {
+    "name": "quiplash2",
+    "title": "Quiplash 2"
+  },
+  "qui3": {
+    "name": "quiplash3",
+    "title": "Quiplash 3"
+  },
+  "quxl": {
+    "name": "quiplashxl",
+    "title": "Quiplash XL"
+  },
+  "role": {
+    "name": "rolemodels",
+    "title": "Role Models"
+  },
+  "spli": {
+    "name": "splittheroom",
+    "title": "Split The Room"
+  },
+  "surv": {
+    "name": "survivetheinternet",
+    "title": "Survive the Internet"
+  },
+  "talk": {
+    "name": "talkingpoints",
+    "title": "Talking Points"
+  },
+  "teek": {
+    "name": "teeko",
+    "title": "Tee K.O."
+  },
+  "devi": {
+    "name": "thedevilsandthedetails",
+    "title": "The Devils and the Details"
+  },
+  "poll": {
+    "name": "thepollmine",
+    "title": "The Poll Mine"
+  },
+  "whee": {
+    "name": "thewheelofenormousproportions",
+    "title": "The Wheel of Enormous Proportions"
+  },
+  "triv": {
+    "name": "triviamurderparty",
+    "title": "Trivia Murder Party"
+  },
+  "tri2": {
+    "name": "triviamurderparty2",
+    "title": "Trivia Murder Party 2"
+  },
+  "weap": {
+    "name": "weaponsdrawn",
+    "title": "Weapons Drawn"
+  },
+  "word": {
+    "name": "wordspud",
+    "title": "Word Spud"
+  },
+  "yo15": {
+    "name": "youdontknowjack2015",
+    "title": "YOU DON’T KNOW JACK 2015"
+  },
+  "youd": {
+    "name": "youdontknowjack",
+    "title": "You Don't Know Jack"
+  },
+  "zeep": {
+    "name": "zeepledome",
+    "title": "Zeeple Dome"
+  }
+}
