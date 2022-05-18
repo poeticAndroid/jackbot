@@ -13,6 +13,6 @@ Loop, 2 {
 Sleep, 1024
 Send, {Enter}
 
-Sleep, 10000
+Sleep, 30000
 Send, {Enter}
 

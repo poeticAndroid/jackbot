@@ -13,5 +13,5 @@ Loop, 4 {
 Sleep, 1024
 Send, {Enter}
 
-Sleep, 5000
+Sleep, 30000
 Send, {Enter}

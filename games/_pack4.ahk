@@ -14,6 +14,6 @@ While (!WinActive("The Jackbox Party Pack")) {
   }
 }
 
-Sleep, 15000
+Sleep, 30000
 Send, {Enter}
-Sleep, 5000
+Sleep, 10000
