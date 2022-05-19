@@ -3,7 +3,8 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-Loop, 4 {
-  Sleep, 1024
+While (WinActive("The Jackbox Party Pack")) {
   WinClose, The Jackbox Party Pack
+  Sleep, 1024
 }
+WinClose, The Jackbox Party Pack

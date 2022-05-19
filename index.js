@@ -113,7 +113,6 @@ function startQuitting(channel) {
       client.say(channel, `It's decided! We're not playing this game anymore! ResidentSleeper`)
       process.exec(`start ./games/_shutdown.ahk`)
       state.state = "idle"
-      startVoting(channel)
     } else {
       client.say(channel, `It's decided! We continue playing this game! SoonerLater`)
       process.exec(`start ./games/_enter.ahk`)
@@ -148,7 +147,7 @@ function startVoting(channel) {
   client.say(channel, `Type '!vote <game name>' to vote for a game!`)
 }
 
-setTimeout(() => {
+setInterval(() => {
   if (state.state === "idle") {
     startVoting(config.channels[0])
   }

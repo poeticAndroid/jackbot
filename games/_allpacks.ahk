@@ -5,16 +5,20 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 CoordMode, Mouse, Client
 
+RunWait, _pack1.ahk
+Sleep, 120000
+RunWait, _pack2.ahk
+Sleep, 120000
+RunWait, _pack3.ahk
+Sleep, 120000
+RunWait, _pack4.ahk
+Sleep, 120000
+RunWait, _pack5.ahk
+Sleep, 120000
+RunWait, _pack6.ahk
+Sleep, 120000
+RunWait, _pack7.ahk
+Sleep, 120000
+RunWait, _pack8.ahk
+Sleep, 120000
 RunWait, _shutdown.ahk
-Sleep, 1024
-Run, steam://rungameid/774461
-While (!WinActive("The Jackbox Party Pack")) {
-  Sleep, 1024
-  If (WinActive("Steam Dialog")) {
-    MouseClick, Left, 160, 248
-  }
-}
-
-Sleep, 30000
-Send, {Enter}
-Sleep, 10000
