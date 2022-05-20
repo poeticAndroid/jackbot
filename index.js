@@ -29,7 +29,7 @@ client.on('message', (channel, tags, message, self) => {
       case "!commands":
       case "!help":
         client.say(channel, `!newgame, !endgame, !exit, !quit - Vote to quit the current game and play something else.`)
-        client.say(channel, `!play, !continue - Vote to NOT quit the current game and keep playing.`)
+        client.say(channel, `!play, !stay, !continue - Vote to NOT quit the current game and keep playing.`)
         client.say(channel, `!game, !vote <game title> - Vote on a specific Jackbox game to play.`)
         break
 
@@ -78,6 +78,7 @@ client.on('message', (channel, tags, message, self) => {
         break
 
       case "!play":
+      case "!stay":
       case "!continue":
         if (state.state === "playing") {
           startQuitting(channel)
@@ -104,7 +105,7 @@ function startQuitting(channel) {
   state.votes = {}
   state.voters = {}
   setTimeout(() => {
-    let bestChoices = ["quit", "continue"]
+    let bestChoices = ["quit"]
     let bestVotes = 0
     for (let candidate in state.votes) {
       if (state.votes[candidate] > bestVotes) {
@@ -114,9 +115,6 @@ function startQuitting(channel) {
       if (state.votes[candidate] === bestVotes) {
         bestChoices.push(candidate)
       }
-    }
-    if (bestChoices.length > 1) {
-      bestChoices = ["quit"]
     }
     let bestChoice = bestChoices[Math.floor(Math.random() * bestChoices.length)]
     if (bestChoice === "quit") {
@@ -157,7 +155,7 @@ function startVoting(channel) {
       client.say(channel, `Tired of waiting for other players to join your game? Please type '!exit' before you leave.`)
     }, 1024 * 64 * 4)
   }, 60000)
-  client.say(channel, `Type '!vote <game name>' to vote for a game!`)
+  client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play!`)
 }
 
 setInterval(() => {
@@ -166,7 +164,7 @@ setInterval(() => {
   }
 }, 4096)
 function lonely(channel) {
-  client.say(config.channels[0], `Is anyone there? type '!exit' or '!play' in the chat!`)
+  client.say(config.channels[0], `Is anyone there? type '!stay' in chat to keep playing!`)
   if (state.state === "playing") {
     startQuitting(config.channels[0])
   }
