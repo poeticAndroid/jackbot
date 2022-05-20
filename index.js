@@ -74,7 +74,7 @@ client.on('message', (channel, tags, message, self) => {
         state.voters[tags.username] = "quit"
         state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
         state.votes[state.voters[tags.username]]++
-        client.say(channel, `@${tags.username} would rather play something else.. SeemsGood`)
+        client.say(channel, `@${tags.username} don't want to play this game anymore.. SeemsGood`)
         break
 
       case "!play":
@@ -114,6 +114,9 @@ function startQuitting(channel) {
       if (state.votes[candidate] === bestVotes) {
         bestChoices.push(candidate)
       }
+    }
+    if (bestChoices.length > 1) {
+      bestChoices = ["quit"]
     }
     let bestChoice = bestChoices[Math.floor(Math.random() * bestChoices.length)]
     if (bestChoice === "quit") {
