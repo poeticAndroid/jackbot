@@ -26,14 +26,24 @@ client.on('message', (channel, tags, message, self) => {
         client.say(channel, `@${tags.username} greetings! HeyGuys`)
         break
 
-      case "!commands":
       case "!help":
+      case "!commands":
         client.say(channel, `!newgame, !endgame, !exit, !quit - Vote to quit the current game and play something else.`)
         client.say(channel, `!play, !stay, !continue - Vote to NOT quit the current game and keep playing.`)
-        client.say(channel, `!game, !vote <game title> - Vote on a specific Jackbox game to play.`)
+        client.say(channel, `!list, !games - List all available games.`)
+        client.say(channel, `!vote <game title> - Vote on a specific Jackbox game to play.`)
         break
 
-      case "!game":
+      case "!list":
+      case "!games":
+        let titles = []
+        for (let game in games) {
+          titles.push(games[game].title)
+        }
+        titles.sort()
+        client.say(channel, "Available games: " + titles.join(", "))
+        break
+
       case "!vote":
         if (state.state === "idle") {
           startVoting(channel)
@@ -152,7 +162,7 @@ function startVoting(channel) {
     process.exec(`start ./games/${games[bestGame].name}.ahk`)
     state.state = "playing"
     setTimeout(() => {
-      client.say(channel, `Tired of waiting for other players to join your game? Please type '!exit' before you leave.`)
+      client.say(channel, `If you join a game and don't wanna play anymore, please type '!exit' in chat before you leave. HeyGuys`)
     }, 1024 * 64 * 4)
   }, 60000)
   client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play!`)
