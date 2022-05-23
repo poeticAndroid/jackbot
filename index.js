@@ -30,6 +30,7 @@ client.on('message', (channel, tags, message, self) => {
       case "!commands":
         client.say(channel, `!newgame, !endgame, !exit, !quit - Vote to quit the current game and play something else.`)
         client.say(channel, `!play, !stay, !continue - Vote to NOT quit the current game and keep playing.`)
+        client.say(channel, `!restart - Vote to restart the current game.`)
         client.say(channel, `!list, !games - List all available games.`)
         client.say(channel, `!vote <game title> - Vote on a specific Jackbox game to play.`)
         break
@@ -106,6 +107,23 @@ client.on('message', (channel, tags, message, self) => {
         client.say(channel, `@${tags.username} wants to keep playing this game.. SeemsGood`)
         break
 
+      case "!restart":
+        if (state.state === "playing") {
+          startQuitting(channel)
+        }
+        if (state.state !== "quitting") {
+          client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
+          return
+        }
+        if (state.voters[tags.username]) {
+          state.votes[state.voters[tags.username]]--
+        }
+        state.voters[tags.username] = "restart"
+        state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
+        state.votes[state.voters[tags.username]]++
+        client.say(channel, `@${tags.username} wants to restart this game.. SeemsGood`)
+        break
+
     }
   }
 })
@@ -131,6 +149,10 @@ function startQuitting(channel) {
       client.say(channel, `It's decided! We're not playing this game anymore! ResidentSleeper`)
       process.exec(`start ./games/_shutdown.ahk`)
       state.state = "idle"
+    } else if (bestChoice === "restart") {
+      client.say(channel, `It's decided! We're restarting the game! VoHiYo`)
+      process.exec(`start ./games/_restart.ahk`)
+      state.state = "playing"
     } else {
       client.say(channel, `It's decided! We'll continue playing this game! SoonerLater`)
       process.exec(`start ./games/_enter.ahk`)
@@ -158,6 +180,7 @@ function startVoting(channel) {
       }
     }
     let bestGame = bestGames[Math.floor(Math.random() * bestGames.length)]
+    state.currentGame = bestGame
     client.say(channel, `It's decided! We're playing ${games[bestGame].title}! PogChamp`)
     process.exec(`start ./games/${games[bestGame].name}.ahk`)
     state.state = "playing"
@@ -165,6 +188,7 @@ function startVoting(channel) {
       client.say(channel, `If you join a game and don't wanna play anymore, please type '!exit' in chat before you leave. HeyGuys`)
     }, 1024 * 64 * 4)
   }, 60000)
+  client.say(channel, `Type '!list' to see a list of all available games.`)
   client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play!`)
 }
 
