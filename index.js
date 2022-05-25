@@ -4,7 +4,7 @@ const
   process = require("child_process"),
   games = require("./games.json")
 
-process.exec(`start ./games/_shutdown.ahk`)
+process.exec(`start ./jackman.ahk exit`)
 
 const state = {
   "state": "idle"
@@ -37,96 +37,116 @@ client.on('message', (channel, tags, message, self) => {
 
       case "!list":
       case "!games":
-        let titles = []
-        for (let game in games) {
-          titles.push(games[game].title)
-        }
-        titles.sort()
-        client.say(channel, "Available games: " + titles.join(", "))
+        listGames(channel, tags, message, self)
         break
 
       case "!vote":
-        if (state.state === "idle") {
-          startVoting(channel)
-        }
-        let gameId = resolveGame(cmd.slice(1))
-        let game = games[gameId]
-        if (game) {
-          if (state.state !== "voting") {
-            client.say(channel, `@${tags.username} type '!newgame' if you want to play something else.. BibleThump`)
-            return
-          }
-          if (state.voters[tags.username]) {
-            state.votes[state.voters[tags.username]]--
-          }
-          state.voters[tags.username] = gameId
-          state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
-          state.votes[state.voters[tags.username]]++
-          client.say(channel, `@${tags.username} wants to play ${game.title}! SeemsGood`)
-        } else {
-          client.say(channel, `@${tags.username} I don't know the game ${cmd.slice(1).join(" ")}! BibleThump`)
-        }
+        voteGame(channel, tags, message, self)
         break
 
       case "!newgame":
-      case "!endgame":
       case "!exit":
       case "!quit":
-        if (state.state === "playing") {
-          startQuitting(channel)
-        }
-        if (state.state !== "quitting") {
-          client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
-          return
-        }
-        if (state.voters[tags.username]) {
-          state.votes[state.voters[tags.username]]--
-        }
-        state.voters[tags.username] = "quit"
-        state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
-        state.votes[state.voters[tags.username]]++
-        client.say(channel, `@${tags.username} don't want to play this game anymore.. SeemsGood`)
+        voteExit(channel, tags, message, self)
         break
 
       case "!play":
       case "!stay":
       case "!continue":
-        if (state.state === "playing") {
-          startQuitting(channel)
-        }
-        if (state.state !== "quitting") {
-          client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
-          return
-        }
-        if (state.voters[tags.username]) {
-          state.votes[state.voters[tags.username]]--
-        }
-        state.voters[tags.username] = "continue"
-        state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
-        state.votes[state.voters[tags.username]]++
-        client.say(channel, `@${tags.username} wants to keep playing this game.. SeemsGood`)
+        voteStay(channel, tags, message, self)
         break
 
       case "!restart":
-        if (state.state === "playing") {
-          startQuitting(channel)
-        }
-        if (state.state !== "quitting") {
-          client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
-          return
-        }
-        if (state.voters[tags.username]) {
-          state.votes[state.voters[tags.username]]--
-        }
-        state.voters[tags.username] = "restart"
-        state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
-        state.votes[state.voters[tags.username]]++
-        client.say(channel, `@${tags.username} wants to restart this game.. SeemsGood`)
+        voteRestart(channel, tags, message, self)
         break
 
     }
   }
 })
+
+function listGames(channel, tags, message, self) {
+  let titles = []
+  for (let game in games) {
+    titles.push(games[game].title)
+  }
+  titles.sort()
+  client.say(channel, "Available games: " + titles.join(", "))
+}
+
+function voteGame(channel, tags, message, self) {
+  let cmd = message.split(" ")
+  if (state.state === "idle") {
+    startVoting(channel)
+  }
+  let gameId = resolveGame(cmd.slice(1))
+  let game = games[gameId]
+  if (game) {
+    if (state.state !== "voting") {
+      client.say(channel, `@${tags.username} type '!newgame' if you want to play something else.. BibleThump`)
+      return
+    }
+    if (state.voters[tags.username]) {
+      state.votes[state.voters[tags.username]]--
+    }
+    state.voters[tags.username] = gameId
+    state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
+    state.votes[state.voters[tags.username]]++
+    client.say(channel, `@${tags.username} wants to play ${game.title}! SeemsGood`)
+  } else {
+    client.say(channel, `@${tags.username} I don't know the game ${cmd.slice(1).join(" ")}! BibleThump`)
+  }
+}
+
+function voteRestart(channel, tags, message, self) {
+  if (state.state === "playing") {
+    startQuitting(channel)
+  }
+  if (state.state !== "quitting") {
+    client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
+    return
+  }
+  if (state.voters[tags.username]) {
+    state.votes[state.voters[tags.username]]--
+  }
+  state.voters[tags.username] = "restart"
+  state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
+  state.votes[state.voters[tags.username]]++
+  client.say(channel, `@${tags.username} wants to restart this game.. SeemsGood`)
+}
+
+function voteExit(channel, tags, message, self) {
+  if (state.state === "playing") {
+    startQuitting(channel)
+  }
+  if (state.state !== "quitting") {
+    client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
+    return
+  }
+  if (state.voters[tags.username]) {
+    state.votes[state.voters[tags.username]]--
+  }
+  state.voters[tags.username] = "quit"
+  state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
+  state.votes[state.voters[tags.username]]++
+  client.say(channel, `@${tags.username} don't want to play this game anymore.. SeemsGood`)
+}
+
+function voteStay(channel, tags, message, self) {
+  if (state.state === "playing") {
+    startQuitting(channel)
+  }
+  if (state.state !== "quitting") {
+    client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
+    return
+  }
+  if (state.voters[tags.username]) {
+    state.votes[state.voters[tags.username]]--
+  }
+  state.voters[tags.username] = "continue"
+  state.votes[state.voters[tags.username]] = state.votes[state.voters[tags.username]] || 0
+  state.votes[state.voters[tags.username]]++
+  client.say(channel, `@${tags.username} wants to keep playing this game.. SeemsGood`)
+}
 
 function startQuitting(channel) {
   state.state = "quitting"
@@ -147,15 +167,15 @@ function startQuitting(channel) {
     let bestChoice = bestChoices[Math.floor(Math.random() * bestChoices.length)]
     if (bestChoice === "quit") {
       client.say(channel, `It's decided! We're not playing this game anymore! ResidentSleeper`)
-      process.exec(`start ./games/_shutdown.ahk`)
+      process.exec(`start ./jackman.ahk exit`)
       state.state = "idle"
     } else if (bestChoice === "restart") {
       client.say(channel, `It's decided! We're restarting the game! VoHiYo`)
-      process.exec(`start ./games/_restart.ahk`)
+      process.exec(`start ./jackman.ahk restart`)
       state.state = "playing"
     } else {
       client.say(channel, `It's decided! We'll continue playing this game! SoonerLater`)
-      process.exec(`start ./games/_enter.ahk`)
+      process.exec(`start ./games/jackman.ahk continue`)
       state.state = "playing"
     }
   }, 60000)
@@ -182,10 +202,10 @@ function startVoting(channel) {
     let bestGame = bestGames[Math.floor(Math.random() * bestGames.length)]
     state.currentGame = bestGame
     client.say(channel, `It's decided! We're playing ${games[bestGame].title}! PogChamp`)
-    process.exec(`start ./games/${games[bestGame].name}.ahk`)
+    process.exec(`start ./jackman.ahk start ${games[bestGame].pack} ${games[bestGame].game}`)
     state.state = "playing"
     setTimeout(() => {
-      client.say(channel, `If you join a game and don't wanna play anymore, please type '!exit' in chat before you leave. HeyGuys`)
+      client.say(channel, `If you join a game and don't wanna play anymore, please type '!restart' in chat before you leave. HeyGuys`)
     }, 1024 * 64 * 4)
   }, 60000)
   client.say(channel, `Type '!list' to see a list of all available games.`)

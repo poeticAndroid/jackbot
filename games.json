@@ -1,162 +1,242 @@
 {
   "bidi": {
     "name": "bidiots",
-    "title": "Bidiots"
+    "title": "Bidiots",
+    "pack": 2,
+    "game": 3
   },
   "blat": {
     "name": "blatherround",
-    "title": "Blather ‘Round"
+    "title": "Blather ‘Round",
+    "pack": 7,
+    "game": 5
   },
   "bomb": {
     "name": "bombcorp",
-    "title": "Bomb Corp."
+    "title": "Bomb Corp.",
+    "pack": 2,
+    "game": 5
   },
   "brac": {
     "name": "bracketeering",
-    "title": "Bracketeering"
+    "title": "Bracketeering",
+    "pack": 4,
+    "game": 4
   },
   "cham": {
     "name": "champdup",
-    "title": "Champ’d Up"
+    "title": "Champ’d Up",
+    "pack": 7,
+    "game": 3
   },
   "civi": {
     "name": "civicdoodle",
-    "title": "Civic Doodle"
+    "title": "Civic Doodle",
+    "pack": 4,
+    "game": 5
   },
   "dict": {
     "name": "dictionarium",
-    "title": "Dictionarium"
+    "title": "Dictionarium",
+    "pack": 6,
+    "game": 4
   },
   "draw": {
     "name": "drawful",
-    "title": "Drawful"
+    "title": "Drawful",
+    "pack": 1,
+    "game": 5
   },
   "dran": {
     "name": "drawfulanimate",
-    "title": "Drawful Animate"
+    "title": "Drawful Animate",
+    "pack": 8,
+    "game": 1
   },
   "earw": {
     "name": "earwax",
-    "title": "Earwax"
+    "title": "Earwax",
+    "pack": 2,
+    "game": 2
   },
   "faki": {
     "name": "fakinit",
-    "title": "Fakin' It"
+    "title": "Fakin' It",
+    "pack": 3,
+    "game": 4
   },
   "fib2": {
     "name": "fibbage2",
-    "title": "Fibbage 2"
+    "title": "Fibbage 2",
+    "pack": 2,
+    "game": 1
   },
   "fib3": {
     "name": "fibbage3",
-    "title": "Fibbage 3"
+    "title": "Fibbage 3",
+    "pack": 4,
+    "game": 1
   },
   "fixl": {
     "name": "fibbagexl",
-    "title": "Fibbage XL"
+    "title": "Fibbage XL",
+    "pack": 1,
+    "game": 2
   },
   "gues": {
     "name": "guesspionage",
-    "title": "Guesspionage"
+    "title": "Guesspionage",
+    "pack": 3,
+    "game": 3
   },
   "jobj": {
     "name": "jobjob",
-    "title": "Job Job"
+    "title": "Job Job",
+    "pack": 8,
+    "game": 3
   },
   "joke": {
     "name": "jokeboat",
-    "title": "Joke Boat"
+    "title": "Joke Boat",
+    "pack": 6,
+    "game": 3
   },
   "lies": {
     "name": "lieswatter",
-    "title": "Lie Swatter"
+    "title": "Lie Swatter",
+    "pack": 1,
+    "game": 3
   },
   "madv": {
     "name": "madversecity",
-    "title": "Mad Verse City"
+    "title": "Mad Verse City",
+    "pack": 5,
+    "game": 3
   },
   "mons": {
     "name": "monsterseekingmonster",
-    "title": "Monster Seeking Monster"
+    "title": "Monster Seeking Monster",
+    "pack": 4,
+    "game": 3
   },
   "pate": {
     "name": "patentlystupid",
-    "title": "Patently Stupid"
+    "title": "Patently Stupid",
+    "pack": 5,
+    "game": 5
   },
   "push": {
     "name": "pushthebutton",
-    "title": "Push The Button"
+    "title": "Push The Button",
+    "pack": 6,
+    "game": 5
   },
   "qui2": {
     "name": "quiplash2",
-    "title": "Quiplash 2"
+    "title": "Quiplash 2",
+    "pack": 3,
+    "game": 1
   },
   "qui3": {
     "name": "quiplash3",
-    "title": "Quiplash 3"
+    "title": "Quiplash 3",
+    "pack": 7,
+    "game": 1
   },
   "quxl": {
     "name": "quiplashxl",
-    "title": "Quiplash XL"
+    "title": "Quiplash XL",
+    "pack": 2,
+    "game": 4
   },
   "role": {
     "name": "rolemodels",
-    "title": "Role Models"
+    "title": "Role Models",
+    "pack": 6,
+    "game": 2
   },
   "spli": {
     "name": "splittheroom",
-    "title": "Split The Room"
+    "title": "Split The Room",
+    "pack": 5,
+    "game": 2
   },
   "surv": {
     "name": "survivetheinternet",
-    "title": "Survive the Internet"
+    "title": "Survive the Internet",
+    "pack": 4,
+    "game": 2
   },
   "talk": {
     "name": "talkingpoints",
-    "title": "Talking Points"
+    "title": "Talking Points",
+    "pack": 7,
+    "game": 4
   },
   "teek": {
     "name": "teeko",
-    "title": "Tee K.O."
+    "title": "Tee K.O.",
+    "pack": 3,
+    "game": 5
   },
   "devi": {
     "name": "thedevilsandthedetails",
-    "title": "The Devils and the Details"
+    "title": "The Devils and the Details",
+    "pack": 7,
+    "game": 2
   },
   "poll": {
     "name": "thepollmine",
-    "title": "The Poll Mine"
+    "title": "The Poll Mine",
+    "pack": 8,
+    "game": 4
   },
   "whee": {
     "name": "thewheelofenormousproportions",
-    "title": "The Wheel of Enormous Proportions"
+    "title": "The Wheel of Enormous Proportions",
+    "pack": 8,
+    "game": 2
   },
   "triv": {
     "name": "triviamurderparty",
-    "title": "Trivia Murder Party"
+    "title": "Trivia Murder Party",
+    "pack": 3,
+    "game": 2
   },
   "tri2": {
     "name": "triviamurderparty2",
-    "title": "Trivia Murder Party 2"
+    "title": "Trivia Murder Party 2",
+    "pack": 6,
+    "game": 1
   },
   "weap": {
     "name": "weaponsdrawn",
-    "title": "Weapons Drawn"
+    "title": "Weapons Drawn",
+    "pack": 8,
+    "game": 5
   },
   "word": {
     "name": "wordspud",
-    "title": "Word Spud"
+    "title": "Word Spud",
+    "pack": 1,
+    "game": 4
   },
   "yo15": {
     "name": "youdontknowjack2015",
-    "title": "YOU DON’T KNOW JACK 2015"
+    "title": "YOU DON’T KNOW JACK 2015",
+    "pack": 1,
+    "game": 1
   },
   "youd": {
     "name": "youdontknowjack",
-    "title": "You Don't Know Jack"
+    "title": "You Don't Know Jack",
+    "pack": 5,
+    "game": 1
   },
   "zeep": {
     "name": "zeepledome",
-    "title": "Zeeple Dome"
+    "title": "Zeeple Dome",
+    "pack": 5,
+    "game": 4
   }
 }
