@@ -32,11 +32,18 @@ client.on('message', (channel, tags, message, self) => {
         client.say(channel, `!play, !stay, !continue - Vote to NOT quit the current game and keep playing.`)
         client.say(channel, `!restart - Vote to restart the current game.`)
         client.say(channel, `!list, !games - List all available games.`)
+        client.say(channel, `!src, !source - Link to source on Github.`)
         client.say(channel, `!vote <game title> - Vote on a specific Jackbox game to play.`)
         break
 
       case "!list":
       case "!games":
+        listGames(channel, tags, message, self)
+        break
+
+      case "!src":
+      case "!source":
+        client.say(channel, `https://github.com/poeticAndroid/jackbot`)
         listGames(channel, tags, message, self)
         break
 

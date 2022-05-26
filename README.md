@@ -1,6 +1,8 @@
 JackBot
 =======
 
+See it in action on https://www.twitch.tv/publicplayground
+
 Requirements
 ------------
  - [node.js](https://nodejs.org/)
