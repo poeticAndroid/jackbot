@@ -182,7 +182,7 @@ function startQuitting(channel) {
       state.state = "playing"
     } else {
       client.say(channel, `It's decided! We'll continue playing this game! SoonerLater`)
-      process.exec(`start ./games/jackman.ahk continue`)
+      process.exec(`start ./jackman.ahk continue`)
       state.state = "playing"
     }
   }, 60000)
