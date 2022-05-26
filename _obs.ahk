@@ -5,8 +5,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 Run, git pull
 Sleep, 20000
-Run, npm i
-Sleep, 20000
 Run, OBS_Studio.lnk
 Sleep, 20000
 WinActivate, OBS Studio
@@ -22,4 +20,4 @@ Send, {Alt up}{Ctrl up}
 ; Send, {Enter}
 
 Sleep, 10000
-Run, node ./index.js
+Run, start.bat
