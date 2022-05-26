@@ -44,7 +44,6 @@ client.on('message', (channel, tags, message, self) => {
       case "!src":
       case "!source":
         client.say(channel, `https://github.com/poeticAndroid/jackbot`)
-        listGames(channel, tags, message, self)
         break
 
       case "!vote":
