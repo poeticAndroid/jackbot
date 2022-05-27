@@ -4,9 +4,9 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 Run, git pull
-Sleep, 20000
+Sleep, 30000
 Run, OBS_Studio.lnk
-Sleep, 20000
+Sleep, 60000
 WinActivate, OBS Studio
 Sleep, 1024
 Send, {Ctrl down}{Alt down}
