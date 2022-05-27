@@ -32,11 +32,11 @@ client.on('message', (channel, tags, message, self) => {
 
       case "!help":
       case "!commands":
-        client.say(channel, `!newgame, !endgame, !exit, !quit - Vote to quit the current game and play something else.`)
-        client.say(channel, `!play, !stay, !continue - Vote to NOT quit the current game and keep playing.`)
+        client.say(channel, `!exit - Vote to quit the current game and play something else.`)
+        client.say(channel, `!stay - Vote to NOT quit the current game and keep playing.`)
         client.say(channel, `!restart - Vote to restart the current game.`)
-        client.say(channel, `!list, !games - List all available games.`)
-        client.say(channel, `!src, !source - Link to source on Github.`)
+        client.say(channel, `!list - List all available games.`)
+        client.say(channel, `!src - Link to source on Github.`)
         client.say(channel, `!vote <game title> - Vote on a specific Jackbox game to play.`)
         break
 
@@ -218,6 +218,9 @@ function startVoting(channel) {
     client.say(channel, `It's decided! We're playing ${games[bestGame].title}! PogChamp`)
     process.exec(`start ./jackman.ahk start ${games[bestGame].pack} ${games[bestGame].game}`)
     state.state = "playing"
+    setTimeout(() => {
+      client.say(channel, `Keep the chat alive while a game is being played. If the chat is idle for too long, I'll assume nobody is playing and end the game.`)
+    }, 1024 * 64 * 2)
     setTimeout(() => {
       client.say(channel, `If you join a game and don't wanna play anymore, please type '!restart' in chat before you leave. HeyGuys`)
     }, 1024 * 64 * 4)
