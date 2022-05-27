@@ -219,7 +219,7 @@ function startVoting(channel) {
     process.exec(`start ./jackman.ahk start ${games[bestGame].pack} ${games[bestGame].game}`)
     state.state = "playing"
     setTimeout(() => {
-      client.say(channel, `Keep the chat alive while a game is being played. If the chat is idle for too long, I'll assume nobody is playing and end the game.`)
+      client.say(channel, `Keep the chat alive during a game. If the chat is idle for too long, I'll assume nobody is playing and end the game. PoroSad`)
     }, 1024 * 64 * 2)
     setTimeout(() => {
       client.say(channel, `If you join a game and don't wanna play anymore, please type '!restart' in chat before you leave. HeyGuys`)
