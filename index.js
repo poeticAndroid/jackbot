@@ -101,7 +101,7 @@ function voteGame(channel, tags, message, self) {
     state.gameVoters[tags.username] = gameId
     state.gameVotes[state.gameVoters[tags.username]] = state.gameVotes[state.gameVoters[tags.username]] || 0
     state.gameVotes[state.gameVoters[tags.username]]++
-    if (state.state !== "voting") {
+    if (state.state === "playing") {
       client.say(channel, `@${tags.username} wants to play ${game.title} after this game! SeemsGood`)
       client.say(channel, `@${tags.username} type '!exit' if you want to play it right away.`)
     } else {
