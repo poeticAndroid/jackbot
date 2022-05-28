@@ -65,6 +65,9 @@ StartGame(pack, game) {
   }
 
   Sleep, 30000
+  If (!WinActive("The Jackbox Party Pack")) {
+    Return
+  }
   Send, {Enter}
   Sleep, 10000
 
