@@ -246,8 +246,10 @@ function lonely(channel) {
 }
 
 function resolveGame(words) {
+  let title = words.join(" ").toLowerCase().trim()
   let result = []
   for (let game in games) {
+    if (games[game].title.toLowerCase() === title) return game
     games[game].id = game
     result.push(games[game])
   }
