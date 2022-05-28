@@ -35,9 +35,9 @@ client.on('message', (channel, tags, message, self) => {
         client.say(channel, `!exit - Vote to quit the current game and play something else.`)
         client.say(channel, `!stay - Vote to NOT quit the current game and keep playing.`)
         client.say(channel, `!restart - Vote to restart the current game.`)
+        client.say(channel, `!vote <game title> - Vote on a Jackbox game to play.`)
         client.say(channel, `!list - List all available games.`)
         client.say(channel, `!src - Link to source on Github.`)
-        client.say(channel, `!vote <game title> - Vote on a specific Jackbox game to play.`)
         break
 
       case "!list":
@@ -194,7 +194,9 @@ function startQuitting(channel) {
     state.quitVotes = {}
     state.quitVoters = {}
   }, 60000)
-  client.say(channel, `Type '!exit', '!restart' or '!stay' in chat to vote!`)
+  setTimeout(() => {
+    client.say(channel, `Type '!exit', '!restart' or '!stay' in chat to vote!`)
+  }, 1024)
 }
 function startVoting(channel) {
   state.state = "voting"
@@ -222,7 +224,7 @@ function startVoting(channel) {
       client.say(channel, `Keep the chat alive during a game. If the chat is idle for too long, I'll assume nobody is playing and end the game. PoroSad`)
     }, 1024 * 64 * 2)
     setTimeout(() => {
-      client.say(channel, `If you join a game and don't wanna play anymore, please type '!restart' in chat before you leave. HeyGuys`)
+      client.say(channel, `If you've joined a game and don't wanna play anymore, please type '!restart' in chat before you leave so others can take your place. HeyGuys`)
     }, 1024 * 64 * 4)
     state.gameVotes = {}
     state.gameVoters = {}
