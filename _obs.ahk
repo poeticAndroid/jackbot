@@ -19,5 +19,5 @@ Send, {Alt up}{Ctrl up}
 ; Sleep, 4096
 ; Send, {Enter}
 
-Sleep, 10000
+Sleep, 30000
 Run, start.bat
