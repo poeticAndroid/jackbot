@@ -62,6 +62,7 @@ StartGame(pack, game) {
     If (WinActive("Steam Dialog")) {
       MouseClick, Left, 160, 232
     }
+    WinActivate, The Jackbox Party Pack
   }
 
   Sleep, 30000
