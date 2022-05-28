@@ -84,16 +84,19 @@ StartGame(pack, game) {
 
 
 Escape() {
+  WinActivate, The Jackbox Party Pack
   If (WinActive("The Jackbox Party Pack")) {
     Send, {Escape}
   }
 }
 Down() {
+  WinActivate, The Jackbox Party Pack
   If (WinActive("The Jackbox Party Pack")) {
     Send, {Down}
   }
 }
 Enter() {
+  WinActivate, The Jackbox Party Pack
   If (WinActive("The Jackbox Party Pack")) {
     Send, {Enter}
   }
