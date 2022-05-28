@@ -38,6 +38,9 @@ ExitGame() {
 }
 
 RestartGame() {
+  If (!WinActive("The Jackbox Party Pack")) {
+    Return
+  }
   Send, {Escape}
   Sleep, 1024
   Send, {Down}
@@ -75,6 +78,8 @@ StartGame(pack, game) {
 
   Loop, 4 {
     Sleep, 10000
-    Send, {Enter}
+    If (WinActive("The Jackbox Party Pack")) {
+      Send, {Enter}
+    }
   }
 }
