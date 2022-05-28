@@ -41,14 +41,14 @@ RestartGame() {
   If (!WinActive("The Jackbox Party Pack")) {
     Return
   }
-  Send, {Escape}
+  Escape()
   Sleep, 1024
-  Send, {Down}
+  Down()
   Sleep, 1024
-  Send, {Enter}
+  Enter()
   Loop, 3 {
     Sleep, 8192
-    Send, {Enter}
+    Enter()
   }
 }
 
@@ -65,24 +65,36 @@ StartGame(pack, game) {
   }
 
   Sleep, 30000
-  If (!WinActive("The Jackbox Party Pack")) {
-    Return
-  }
-  Send, {Enter}
+  Enter()
   Sleep, 10000
 
   Loop, %game% {
     Sleep, 1024
-    Send, {Down}
+    Down()
   }
 
   Sleep, 1024
-  Send, {Enter}
+  Enter()
 
   Loop, 4 {
     Sleep, 10000
-    If (WinActive("The Jackbox Party Pack")) {
-      Send, {Enter}
-    }
+    Enter()
+  }
+}
+
+
+Escape() {
+  If (WinActive("The Jackbox Party Pack")) {
+    Send, {Escape}
+  }
+}
+Down() {
+  If (WinActive("The Jackbox Party Pack")) {
+    Send, {Down}
+  }
+}
+Enter() {
+  If (WinActive("The Jackbox Party Pack")) {
+    Send, {Enter}
   }
 }
