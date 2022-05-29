@@ -9,13 +9,17 @@ Run, OBS_Studio.lnk
 Sleep, 60000
 WinActivate, OBS Studio
 Sleep, 1024
-Send, {Ctrl down}{Alt down}
+Send, {Ctrl down}
+Sleep, 256
+Send, {Alt down}
 Sleep, 256
 Send, {l down}
 Sleep, 256
 Send, {l up}
 Sleep, 256
-Send, {Alt up}{Ctrl up}
+Send, {Alt up}
+Sleep, 256
+Send, {Ctrl up}
 ; Sleep, 4096
 ; Send, {Enter}
 
