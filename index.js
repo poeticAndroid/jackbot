@@ -195,7 +195,7 @@ function startQuitting(channel) {
     state.quitVoters = {}
   }, 60000)
   setTimeout(() => {
-    client.say(channel, `Type '!exit', '!restart' or '!stay' in chat to vote!`)
+    client.say(channel, `Type '!exit', '!restart' or '!stay' in chat to vote! You now have one minute to vote!`)
   }, 1024)
 }
 function startVoting(channel) {
@@ -229,8 +229,8 @@ function startVoting(channel) {
     state.gameVotes = {}
     state.gameVoters = {}
   }, 60000)
-  client.say(channel, `Type '!list' to see a list of all available games.`)
-  client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play!`)
+  client.say(channel, `Type '!list' to see a list of all available games. Read more about each game at https://www.jackboxgames.com/games/`)
+  client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play! You now have one minute to vote!`)
 }
 
 setInterval(() => {
