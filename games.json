@@ -3,240 +3,321 @@
     "name": "bidiots",
     "title": "Bidiots",
     "pack": 2,
-    "game": 3
+    "game": 3,
+    "playersMin": 3,
+    "playersMax": 6
   },
   "blat": {
     "name": "blatherround",
     "title": "Blather ‘Round",
     "pack": 7,
-    "game": 5
+    "game": 5,
+    "playersMin": 2,
+    "playersMax": 6
   },
   "bomb": {
     "name": "bombcorp",
     "title": "Bomb Corp.",
     "pack": 2,
-    "game": 5
+    "game": 5,
+    "playersMin": 1,
+    "playersMax": 4
   },
   "brac": {
     "name": "bracketeering",
     "title": "Bracketeering",
     "pack": 4,
-    "game": 4
+    "game": 4,
+    "playersMin": 3,
+    "playersMax": 16
   },
   "cham": {
     "name": "champdup",
     "title": "Champ’d Up",
     "pack": 7,
-    "game": 3
+    "game": 3,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "civi": {
     "name": "civicdoodle",
     "title": "Civic Doodle",
     "pack": 4,
-    "game": 5
+    "game": 5,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "dict": {
     "name": "dictionarium",
     "title": "Dictionarium",
     "pack": 6,
-    "game": 4
+    "game": 4,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "draw": {
     "name": "drawful",
     "title": "Drawful",
     "pack": 1,
-    "game": 5
+    "game": 5,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "dran": {
     "name": "drawfulanimate",
     "title": "Drawful Animate",
     "pack": 8,
-    "game": 1
+    "game": 1,
+    "playersMin": 3,
+    "playersMax": 10
   },
   "earw": {
     "name": "earwax",
     "title": "Earwax",
     "pack": 2,
-    "game": 2
+    "game": 2,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "faki": {
     "name": "fakinit",
     "title": "Fakin' It",
     "pack": 3,
-    "game": 4
+    "game": 4,
+    "playersMin": 3,
+    "playersMax": 6
   },
   "fib2": {
     "name": "fibbage2",
     "title": "Fibbage 2",
     "pack": 2,
-    "game": 1
+    "game": 1,
+    "playersMin": 2,
+    "playersMax": 8
   },
   "fib3": {
     "name": "fibbage3",
     "title": "Fibbage 3",
     "pack": 4,
-    "game": 1
+    "game": 1,
+    "playersMin": 2,
+    "playersMax": 8
   },
   "fixl": {
     "name": "fibbagexl",
     "title": "Fibbage XL",
     "pack": 1,
-    "game": 2
+    "game": 2,
+    "playersMin": 2,
+    "playersMax": 8
   },
   "gues": {
     "name": "guesspionage",
     "title": "Guesspionage",
     "pack": 3,
-    "game": 3
+    "game": 3,
+    "playersMin": 2,
+    "playersMax": 8
   },
   "jobj": {
     "name": "jobjob",
     "title": "Job Job",
     "pack": 8,
-    "game": 3
+    "game": 3,
+    "playersMin": 3,
+    "playersMax": 10
   },
   "joke": {
     "name": "jokeboat",
     "title": "Joke Boat",
     "pack": 6,
-    "game": 3
+    "game": 3,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "lies": {
     "name": "lieswatter",
     "title": "Lie Swatter",
     "pack": 1,
-    "game": 3
+    "game": 3,
+    "playersMin": 1,
+    "playersMax": 100
   },
   "madv": {
     "name": "madversecity",
     "title": "Mad Verse City",
     "pack": 5,
-    "game": 3
+    "game": 3,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "mons": {
     "name": "monsterseekingmonster",
     "title": "Monster Seeking Monster",
     "pack": 4,
-    "game": 3
+    "game": 3,
+    "playersMin": 3,
+    "playersMax": 7
   },
   "pate": {
     "name": "patentlystupid",
     "title": "Patently Stupid",
     "pack": 5,
-    "game": 5
+    "game": 5,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "push": {
     "name": "pushthebutton",
     "title": "Push The Button",
     "pack": 6,
-    "game": 5
+    "game": 5,
+    "playersMin": 4,
+    "playersMax": 10
   },
   "qui2": {
     "name": "quiplash2",
     "title": "Quiplash 2",
     "pack": 3,
-    "game": 1
+    "game": 1,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "qui3": {
     "name": "quiplash3",
     "title": "Quiplash 3",
     "pack": 7,
-    "game": 1
+    "game": 1,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "quxl": {
     "name": "quiplashxl",
     "title": "Quiplash XL",
     "pack": 2,
-    "game": 4
+    "game": 4,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "role": {
     "name": "rolemodels",
     "title": "Role Models",
     "pack": 6,
-    "game": 2
+    "game": 2,
+    "playersMin": 3,
+    "playersMax": 6
   },
   "spli": {
     "name": "splittheroom",
     "title": "Split The Room",
     "pack": 5,
-    "game": 2
+    "game": 2,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "surv": {
     "name": "survivetheinternet",
     "title": "Survive the Internet",
     "pack": 4,
-    "game": 2
+    "game": 2,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "talk": {
     "name": "talkingpoints",
     "title": "Talking Points",
     "pack": 7,
-    "game": 4
+    "game": 4,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "teek": {
     "name": "teeko",
     "title": "Tee K.O.",
     "pack": 3,
-    "game": 5
+    "game": 5,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "devi": {
     "name": "thedevilsandthedetails",
     "title": "The Devils and the Details",
     "pack": 7,
-    "game": 2
+    "game": 2,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "poll": {
     "name": "thepollmine",
     "title": "The Poll Mine",
     "pack": 8,
-    "game": 4
+    "game": 4,
+    "playersMin": 2,
+    "playersMax": 10
   },
   "whee": {
     "name": "thewheelofenormousproportions",
     "title": "The Wheel of Enormous Proportions",
     "pack": 8,
-    "game": 2
+    "game": 2,
+    "playersMin": 3,
+    "playersMax": 8
   },
   "triv": {
     "name": "triviamurderparty",
     "title": "Trivia Murder Party",
     "pack": 3,
-    "game": 2
+    "game": 2,
+    "playersMin": 1,
+    "playersMax": 8
   },
   "tri2": {
     "name": "triviamurderparty2",
     "title": "Trivia Murder Party 2",
     "pack": 6,
-    "game": 1
+    "game": 1,
+    "playersMin": 1,
+    "playersMax": 8
   },
   "weap": {
     "name": "weaponsdrawn",
     "title": "Weapons Drawn",
     "pack": 8,
-    "game": 5
+    "game": 5,
+    "playersMin": 4,
+    "playersMax": 8
   },
   "word": {
     "name": "wordspud",
     "title": "Word Spud",
     "pack": 1,
-    "game": 4
+    "game": 4,
+    "playersMin": 2,
+    "playersMax": 8
   },
   "yo15": {
     "name": "youdontknowjack2015",
     "title": "YOU DON’T KNOW JACK 2015",
     "pack": 1,
-    "game": 1
+    "game": 1,
+    "playersMin": 1,
+    "playersMax": 4
   },
   "youd": {
     "name": "youdontknowjack",
     "title": "You Don't Know Jack",
     "pack": 5,
-    "game": 1
+    "game": 1,
+    "playersMin": 1,
+    "playersMax": 8
   },
   "zeep": {
     "name": "zeepledome",
     "title": "Zeeple Dome",
     "pack": 5,
-    "game": 4
+    "game": 4,
+    "playersMin": 1,
+    "playersMax": 6,
+    "lowLatency": true
   }
 }

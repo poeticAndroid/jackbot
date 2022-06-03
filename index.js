@@ -12,6 +12,7 @@ const state = {
   gameVoters: {},
   quitVotes: {},
   quitVoters: {},
+  chatters: []
 }
 const client = new tmi.Client(config)
 let loneliness
@@ -22,6 +23,9 @@ client.on('message', (channel, tags, message, self) => {
   loneliness = setInterval(() => {
     lonely(channel)
   }, 1024 * 64 * 16)
+  if (!state.chatters.includes(tags.username)) {
+    state.chatters.push(tags.username)
+  }
   if (self) return
   if (message.slice(0, 1) === '!') {
     let cmd = message.split(" ")
@@ -204,7 +208,9 @@ function startVoting(channel) {
     let bestGames = []
     let bestVotes = 0
     for (let game in games) {
-      bestGames.push(game)
+      if (games[game].playersMin <= state.chatters.length && !games[game].lowLatency) {
+        bestGames.push(game)
+      }
     }
     for (let candidate in state.gameVotes) {
       if (state.gameVotes[candidate] > bestVotes) {
@@ -228,6 +234,7 @@ function startVoting(channel) {
     }, 1024 * 64 * 4)
     state.gameVotes = {}
     state.gameVoters = {}
+    state.chatters = []
   }, 60000)
   client.say(channel, `Type '!list' to see a list of all available games. Read more about each game at https://www.jackboxgames.com/games/`)
   client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play! You now have one minute to vote!`)
