@@ -44,7 +44,6 @@ RestartGame() {
   Escape()
   Sleep, 512
   Down()
-  Down()
   Sleep, 1024
   Enter()
   Loop, 3 {
