@@ -89,6 +89,10 @@ function listGames(channel, tags, message, self) {
 
 function voteGame(channel, tags, message, self) {
   let cmd = message.split(" ")
+  if (!cmd[1]) {
+    client.say(channel, `@${tags.username} forgot to give a title! Type '!vote' followed by the game title.. (or just some of it) BibleThump`)
+    return
+  }
   if (state.state === "idle") {
     startVoting(channel)
   }
