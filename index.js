@@ -81,10 +81,10 @@ client.on('message', (channel, tags, message, self) => {
 function listGames(channel, tags, message, self) {
   let titles = []
   for (let game in games) {
-    titles.push(games[game].title)
+    titles.push(`${games[game].title} (${games[game].playersMin})`)
   }
   titles.sort()
-  client.say(channel, "Available games: " + titles.join(", "))
+  client.say(channel, "Available games (and players required): " + titles.join(", "))
 }
 
 function voteGame(channel, tags, message, self) {
@@ -241,7 +241,7 @@ function startVoting(channel) {
     state.chatters = []
   }, 60000)
   client.say(channel, `Type '!list' to see a list of all available games. Read more about each game at https://www.jackboxgames.com/games/`)
-  client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play! You now have one minute to vote!`)
+  client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play! You have one minute left to vote!`)
 }
 
 setInterval(() => {
