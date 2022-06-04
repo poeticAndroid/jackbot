@@ -42,7 +42,7 @@ RestartGame() {
     Return
   }
   Escape()
-  Sleep, 256
+  Sleep, 512
   Down()
   Sleep, 256
   Down()
