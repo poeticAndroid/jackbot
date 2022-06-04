@@ -42,7 +42,7 @@ RestartGame() {
     Return
   }
   Escape()
-  Sleep, 1024
+  ; Sleep, 1024
   Down()
   Sleep, 1024
   Enter()
@@ -76,10 +76,11 @@ StartGame(pack, game) {
 
   Sleep, 1024
   Enter()
+  Sleep, 4096
 
-  Loop, 4 {
-    Sleep, 10000
+  While (WinActive("The Jackbox Party Pack")) {
     Enter()
+    Sleep, 10000
   }
 }
 
