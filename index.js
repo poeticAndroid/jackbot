@@ -202,7 +202,7 @@ function startQuitting(channel) {
     state.quitVoters = {}
   }, 60000)
   setTimeout(() => {
-    client.say(channel, `Type '!exit', '!restart' or '!stay' in chat to vote! You now have one minute to vote!`)
+    client.say(channel, `Anyone else? Type '!exit', '!restart' or '!stay' in chat to vote! You now have one minute to vote!`)
   }, 1024)
 }
 function startVoting(channel) {
