@@ -70,7 +70,7 @@ StartGame(pack, game) {
   Sleep, 10000
 
   Loop, %game% {
-    Sleep, 1024
+    Sleep, 256
     Down()
   }
 
