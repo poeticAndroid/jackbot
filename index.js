@@ -99,10 +99,7 @@ function voteGame(channel, tags, message, self) {
   let gameId = resolveGame(cmd.slice(1))
   let game = games[gameId]
   if (game) {
-    // if (state.state !== "voting") {
-    //   client.say(channel, `@${tags.username} type '!newgame' if you want to play something else.. BibleThump`)
-    //   return
-    // }
+    let same = state.gameVoters[tags.username] === gameId
     if (state.gameVoters[tags.username]) {
       state.gameVotes[state.gameVoters[tags.username]]--
     }
@@ -112,6 +109,8 @@ function voteGame(channel, tags, message, self) {
     if (state.state === "playing") {
       client.say(channel, `@${tags.username} wants to play ${game.title} after this game! SeemsGood`)
       client.say(channel, `@${tags.username} type '!exit' if you want to play it right away.`)
+    } else if (same) {
+      client.say(channel, `@${tags.username} dont worry. I haven't forgotten your vote for ${game.title}! SeemsGood`)
     } else {
       client.say(channel, `@${tags.username} wants to play ${game.title}! SeemsGood`)
     }
@@ -228,13 +227,15 @@ function startVoting(channel) {
     let bestGame = bestGames[Math.floor(Math.random() * bestGames.length)]
     state.currentGame = bestGame
     client.say(channel, `It's decided! We're playing ${games[bestGame].title}! PogChamp`)
-    if (games[bestGame].playersMin > 1) {
-      client.say(channel, `${games[bestGame].playersMin} players are needed for this game.. Please be patient..`)
-    } else {
-      client.say(channel, `You can play this game by yourself or wait for other players.. Up to you..`)
-    }
     process.exec(`start ./jackman.ahk start ${games[bestGame].pack} ${games[bestGame].game}`)
     state.state = "playing"
+    setTimeout(() => {
+      if (games[bestGame].playersMin > 1) {
+        client.say(channel, `${games[bestGame].playersMin} players are needed for this game.. Invite some friends to the stream and have fun! PartyHat`)
+      } else {
+        client.say(channel, `You can play this game by yourself or wait for other players.. Up to you.. GunRun`)
+      }
+    }, 1024 * 64 * 1)
     setTimeout(() => {
       client.say(channel, `Keep the chat alive during a game. If the chat is idle for more than 15 minutes, I'll assume nobody is playing and end the game. PoroSad`)
     }, 1024 * 64 * 2)
