@@ -231,7 +231,7 @@ function startVoting(channel) {
     state.state = "playing"
     setTimeout(() => {
       if (games[bestGame].playersMin > 1) {
-        client.say(channel, `${games[bestGame].playersMin} players are needed for this game.. Invite some friends to the stream and have fun! PartyHat`)
+        client.say(channel, `At least ${games[bestGame].playersMin} players are needed for this game.. Invite some friends to the stream and have fun! PartyHat`)
       } else {
         client.say(channel, `You can play this game by yourself or wait for other players.. Up to you.. GunRun`)
       }
