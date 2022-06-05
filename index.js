@@ -228,6 +228,11 @@ function startVoting(channel) {
     let bestGame = bestGames[Math.floor(Math.random() * bestGames.length)]
     state.currentGame = bestGame
     client.say(channel, `It's decided! We're playing ${games[bestGame].title}! PogChamp`)
+    if (games[bestGame].playersMin > 1) {
+      client.say(channel, `${games[bestGame].playersMin} players are needed for this game.. Please be patient..`)
+    } else {
+      client.say(channel, `You can play this game by yourself or wait for other players.. Up to you..`)
+    }
     process.exec(`start ./jackman.ahk start ${games[bestGame].pack} ${games[bestGame].game}`)
     state.state = "playing"
     setTimeout(() => {
