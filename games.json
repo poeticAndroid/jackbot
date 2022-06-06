@@ -260,7 +260,7 @@
     "title": "The Wheel of Enormous Proportions",
     "pack": 8,
     "game": 2,
-    "playersMin": 3,
+    "playersMin": 2,
     "playersMax": 8
   },
   "triv": {
