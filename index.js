@@ -173,6 +173,9 @@ function voteStay(channel, tags, message, self) {
 function startQuitting(channel) {
   state.state = "quitting"
   setTimeout(() => {
+    client.say(channel, `Anyone else? Type '!exit', '!restart' or '!stay' in chat to vote! You now have one minute to vote!`)
+  }, 1024)
+  setTimeout(() => {
     let bestChoices = ["quit"]
     let bestVotes = 0
     for (let candidate in state.quitVotes) {
@@ -201,18 +204,17 @@ function startQuitting(channel) {
     state.quitVotes = {}
     state.quitVoters = {}
   }, 60000)
-  setTimeout(() => {
-    client.say(channel, `Anyone else? Type '!exit', '!restart' or '!stay' in chat to vote! You now have one minute to vote!`)
-  }, 1024)
 }
 function startVoting(channel) {
   state.state = "voting"
+  client.say(channel, `Type '!list' to see a list of all available games. Read more about each game at https://www.jackboxgames.com/games/`)
+  client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play! You have one minute left to vote!`)
   setTimeout(() => {
     let bestGames = []
     let bestVotes = 0
     for (let game in games) {
       if (games[game].playersMin <= state.chatters.length && !games[game].lowLatency) {
-        bestGames.push(game)
+        if (state.currentGame !== game) bestGames.push(game)
       }
     }
     for (let candidate in state.gameVotes) {
@@ -246,8 +248,6 @@ function startVoting(channel) {
     state.gameVoters = {}
     state.chatters = []
   }, 60000)
-  client.say(channel, `Type '!list' to see a list of all available games. Read more about each game at https://www.jackboxgames.com/games/`)
-  client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play! You have one minute left to vote!`)
 }
 
 setInterval(() => {
