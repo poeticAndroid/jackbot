@@ -100,17 +100,21 @@ function voteGame(channel, tags, message, self) {
   let game = games[gameId]
   if (game) {
     let same = state.gameVoters[tags.username] === gameId
+    let change = false
     if (state.gameVoters[tags.username]) {
       state.gameVotes[state.gameVoters[tags.username]]--
+      change = true
     }
     state.gameVoters[tags.username] = gameId
     state.gameVotes[state.gameVoters[tags.username]] = state.gameVotes[state.gameVoters[tags.username]] || 0
     state.gameVotes[state.gameVoters[tags.username]]++
-    if (state.state === "playing") {
+    if (same) {
+      client.say(channel, `@${tags.username} dont worry. I haven't forgotten your vote for ${game.title}! SeemsGood`)
+    } else if (change) {
+      client.say(channel, `@${tags.username} changed their mind and would rather play ${game.title} instead. SeemsGood`)
+    } else if (state.state === "playing") {
       client.say(channel, `@${tags.username} wants to play ${game.title} after this game! SeemsGood`)
       client.say(channel, `@${tags.username} type '!exit' if you want to play it right away.`)
-    } else if (same) {
-      client.say(channel, `@${tags.username} dont worry. I haven't forgotten your vote for ${game.title}! SeemsGood`)
     } else {
       client.say(channel, `@${tags.username} wants to play ${game.title}! SeemsGood`)
     }
@@ -127,13 +131,22 @@ function voteRestart(channel, tags, message, self) {
     client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
     return
   }
+  let same = state.quitVoters[tags.username] === "restart"
+  let change = false
   if (state.quitVoters[tags.username]) {
     state.quitVotes[state.quitVoters[tags.username]]--
+    change = true
   }
   state.quitVoters[tags.username] = "restart"
   state.quitVotes[state.quitVoters[tags.username]] = state.quitVotes[state.quitVoters[tags.username]] || 0
   state.quitVotes[state.quitVoters[tags.username]]++
-  client.say(channel, `@${tags.username} wants to restart this game.. SeemsGood`)
+  if (same) {
+    // client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
+  } else if (change) {
+    client.say(channel, `@${tags.username} changed their mind and wants to restart this game instead.. SeemsGood`)
+  } else {
+    client.say(channel, `@${tags.username} wants to restart this game.. SeemsGood`)
+  }
 }
 
 function voteExit(channel, tags, message, self) {
@@ -144,13 +157,22 @@ function voteExit(channel, tags, message, self) {
     client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
     return
   }
+  let same = state.quitVoters[tags.username] === "quit"
+  let change = false
   if (state.quitVoters[tags.username]) {
     state.quitVotes[state.quitVoters[tags.username]]--
+    change = true
   }
   state.quitVoters[tags.username] = "quit"
   state.quitVotes[state.quitVoters[tags.username]] = state.quitVotes[state.quitVoters[tags.username]] || 0
   state.quitVotes[state.quitVoters[tags.username]]++
-  client.say(channel, `@${tags.username} don't want to play this game anymore.. SeemsGood`)
+  if (same) {
+    // client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
+  } else if (change) {
+    client.say(channel, `@${tags.username} changed their mind and wants to end this game instead.. SeemsGood`)
+  } else {
+    client.say(channel, `@${tags.username} don't want to play this game anymore.. SeemsGood`)
+  }
 }
 
 function voteStay(channel, tags, message, self) {
@@ -161,13 +183,22 @@ function voteStay(channel, tags, message, self) {
     client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
     return
   }
+  let same = state.quitVoters[tags.username] === "continue"
+  let change = false
   if (state.quitVoters[tags.username]) {
     state.quitVotes[state.quitVoters[tags.username]]--
+    change = true
   }
   state.quitVoters[tags.username] = "continue"
   state.quitVotes[state.quitVoters[tags.username]] = state.quitVotes[state.quitVoters[tags.username]] || 0
   state.quitVotes[state.quitVoters[tags.username]]++
-  client.say(channel, `@${tags.username} wants to keep playing this game.. SeemsGood`)
+  if (same) {
+    // client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
+  } else if (change) {
+    client.say(channel, `@${tags.username} changed their mind and wants to keep playing this game instead.. SeemsGood`)
+  } else {
+    client.say(channel, `@${tags.username} wants to keep playing this game.. SeemsGood`)
+  }
 }
 
 function startQuitting(channel) {
