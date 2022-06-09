@@ -50,6 +50,10 @@ RestartGame() {
     Sleep, 8192
     Enter()
   }
+  Loop, 10 {
+    Sleep, 1024
+    Left()
+  }
 }
 
 StartGame(pack, game) {
@@ -89,6 +93,12 @@ Escape() {
   WinActivate, The Jackbox Party Pack
   If (WinActive("The Jackbox Party Pack")) {
     Send, {Escape}
+  }
+}
+Left() {
+  WinActivate, The Jackbox Party Pack
+  If (WinActive("The Jackbox Party Pack")) {
+    Send, {Left}
   }
 }
 Down() {
