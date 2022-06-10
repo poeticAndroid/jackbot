@@ -116,7 +116,7 @@ function voteGame(channel, tags, message, self) {
       client.say(channel, `@${tags.username} wants to play ${game.title}! SeemsGood`)
     }
     if (state.state === "playing" && !exitReminder) {
-      client.say(channel, `Type '!exit' to end the current game.`)
+      client.say(channel, `Type '!exit' to vote to end the current game.`)
       exitReminder = setTimeout(() => {
         exitReminder = false
       }, 1024 * 64)
