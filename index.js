@@ -36,9 +36,9 @@ client.on('message', (channel, tags, message, self) => {
 
       case "!help":
       case "!commands":
-        client.say(channel, `!exit - Vote to quit the current game and play something else.`)
-        client.say(channel, `!stay - Vote to NOT quit the current game and keep playing.`)
-        client.say(channel, `!restart - Vote to restart the current game.`)
+        client.say(channel, `!exit - vote for quiting the current game and play something else.`)
+        client.say(channel, `!stay - vote for NOT quiting the current game and keep playing.`)
+        client.say(channel, `!restart - vote for restarting the current game.`)
         client.say(channel, `!vote <game title> - Vote on a Jackbox game to play.`)
         client.say(channel, `!list - List all available games.`)
         client.say(channel, `!src - Link to source on Github.`)
@@ -116,7 +116,7 @@ function voteGame(channel, tags, message, self) {
       client.say(channel, `@${tags.username} wants to play ${game.title}! SeemsGood`)
     }
     if (state.state === "playing" && !exitReminder) {
-      client.say(channel, `Type '!exit' to vote to end the current game.`)
+      client.say(channel, `Type '!exit' to vote for ending the current game.`)
       exitReminder = setTimeout(() => {
         exitReminder = false
       }, 1024 * 64)
