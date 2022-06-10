@@ -15,7 +15,7 @@ const state = {
   chatters: []
 }
 const client = new tmi.Client(config)
-let loneliness
+let loneliness, exitReminder
 
 client.connect().catch(console.error)
 client.on('message', (channel, tags, message, self) => {
@@ -112,11 +112,14 @@ function voteGame(channel, tags, message, self) {
       client.say(channel, `@${tags.username} dont worry. I haven't forgotten your vote for ${game.title}! SeemsGood`)
     } else if (change) {
       client.say(channel, `@${tags.username} changed their mind and would rather play ${game.title} instead. SeemsGood`)
-    } else if (state.state === "playing") {
-      client.say(channel, `@${tags.username} wants to play ${game.title} after this game! SeemsGood`)
-      client.say(channel, `@${tags.username} type '!exit' if you want to play it right away.`)
     } else {
       client.say(channel, `@${tags.username} wants to play ${game.title}! SeemsGood`)
+    }
+    if (state.state === "playing" && !exitReminder) {
+      client.say(channel, `Type '!exit' to end the current game.`)
+      exitReminder = setTimeout(() => {
+        exitReminder = false
+      }, 1024 * 64)
     }
   } else {
     client.say(channel, `@${tags.username} I don't know the game ${cmd.slice(1).join(" ")}! BibleThump`)
