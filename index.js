@@ -345,6 +345,11 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200
     return res.end('window.games = ' + JSON.stringify(games, null, 2))
   }
+  if (req.url === "/boot.js") {
+    res.setHeader("Content-Type", "application/javascript; charset=utf-8")
+    res.statusCode = 200
+    return res.end(`location.assign("http://${req.headers.host}/")`)
+  }
   res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader("Cache-Control", "max-age=4096")
   let filename = "./web" + req.url
