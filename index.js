@@ -28,7 +28,11 @@ client.on('message', (channel, tags, message, self) => {
   }
   if (self) return
   if (message.slice(0, 1) === '!') {
-    let cmd = message.split(" ")
+    let cmd = message.trim().split(/\s+/)
+    if (cmd[0] === "!") {
+      cmd.shift()
+      cmd[0] = "!" + cmd[0]
+    }
     switch (cmd[0]) {
       case "!hello":
         client.say(channel, `@${tags.username} greetings! HeyGuys`)
@@ -88,7 +92,7 @@ function listGames(channel, tags, message, self) {
 }
 
 function voteGame(channel, tags, message, self) {
-  let cmd = message.replaceAll("<", "").replaceAll(">", "").split(" ")
+  let cmd = message.replaceAll("<", "").replaceAll(">", "").trim().split(/\s+/)
   if (!cmd[1]) {
     client.say(channel, `@${tags.username} forgot to give a title! Type '!vote' followed by the game title.. (or just some of it) BibleThump`)
     return
@@ -247,7 +251,7 @@ function startVoting(channel) {
     let bestGames = []
     let bestVotes = 0
     for (let game in games) {
-      if (games[game].playersMin <= state.chatters.length && !games[game].lowLatency) {
+      if (games[game].playersMin <= state.chatters.length) {
         if (state.currentGame !== game) bestGames.push(game)
       }
     }
@@ -342,6 +346,7 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200
     return res.end('window.games = ' + JSON.stringify(games, null, 2))
   }
+  res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader("Cache-Control", "max-age=4096")
   let filename = "./web" + req.url
   if (filename.slice(-1) === "/") {
