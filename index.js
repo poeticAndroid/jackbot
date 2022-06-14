@@ -327,7 +327,6 @@ function resolveGame(words) {
 
 /// web server ///
 
-/*
 const http = require("http"),
   fs = require("fs"),
   path = require("path")
@@ -380,4 +379,3 @@ const server = http.createServer((req, res) => {
 server.listen(port, "", () => {
   console.log(`Server running at http://${hostname}:${port}/`)
 })
-*/
