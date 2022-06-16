@@ -10,8 +10,8 @@
 
 <body>
   <p>waiting for <a href="http://localhost:3000/">💻server</a>...</p>
-  <script src="http://localhost:3000/boot.js"></script>
   <script>
+    document.write(`<script src="http://localhost:3000/boot.js?now=${Date.now()}"><\/script>`)
     setTimeout(() => {
       if (present) document.querySelector("a").click()
     }, 4096)

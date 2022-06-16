@@ -335,24 +335,25 @@ const hostname = "127.0.0.1"
 const port = 3000
 
 const server = http.createServer((req, res) => {
-  if (req.url === "/state.json") {
+  let file = req.url.slice(0, ((req.url + "?")).indexOf("?"))
+  if (file === "/state.json") {
     res.setHeader("Content-Type", "application/json; charset=utf-8")
     res.statusCode = 200
     return res.end(JSON.stringify(state, null, 2))
   }
-  if (req.url === "/games.js") {
+  if (file === "/games.js") {
     res.setHeader("Content-Type", "application/javascript; charset=utf-8")
     res.statusCode = 200
     return res.end('window.games = ' + JSON.stringify(games, null, 2))
   }
-  if (req.url === "/boot.js") {
+  if (file === "/boot.js") {
     res.setHeader("Content-Type", "application/javascript; charset=utf-8")
     res.statusCode = 200
     return res.end(`present=true`)
   }
   res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader("Cache-Control", "max-age=4096")
-  let filename = "./web" + req.url
+  let filename = "./web" + file
   if (filename.slice(-1) === "/") {
     filename += "index.html"
   }
