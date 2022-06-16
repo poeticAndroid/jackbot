@@ -346,7 +346,7 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200
     return res.end('window.games = ' + JSON.stringify(games, null, 2))
   }
-  if (file === "/boot.js") {
+  if (file === "/present.js") {
     res.setHeader("Content-Type", "application/javascript; charset=utf-8")
     res.statusCode = 200
     return res.end(`present=true`)

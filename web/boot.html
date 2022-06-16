@@ -12,7 +12,7 @@
   <p>waiting for <a href="http://localhost:3000/">💻server</a>...</p>
   <script>
     let a = document.querySelector("a")
-    document.write(`<script src="${a.href}boot.js?now=${Date.now()}"><\/script>`)
+    document.write(`<script src="${a.href}present.js?now=${Date.now()}"><\/script>`)
     setTimeout(() => {
       if (present) a.click()
     }, 4096)
