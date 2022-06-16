@@ -1,6 +1,10 @@
+html {
+  height: 100vh;
+}
+
 html.idle,
 html.voting {
   background-image: url("./idle.png");
-  background-position: center;
+  background-position: center center;
   background-size: cover;
 }
