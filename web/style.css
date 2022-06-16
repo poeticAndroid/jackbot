@@ -1,1 +1,6 @@
-// empty for now
+html.idle,
+html.voting {
+  background-image: url("./idle.png");
+  background-position: center;
+  background-size: cover;
+}
