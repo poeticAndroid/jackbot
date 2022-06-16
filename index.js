@@ -348,7 +348,7 @@ const server = http.createServer((req, res) => {
   if (req.url === "/boot.js") {
     res.setHeader("Content-Type", "application/javascript; charset=utf-8")
     res.statusCode = 200
-    return res.end(`location.assign("http://${req.headers.host}/")`)
+    return res.end(`present=true`)
   }
   res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader("Cache-Control", "max-age=4096")
