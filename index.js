@@ -155,9 +155,9 @@ function voteRestart(channel, tags, message, self) {
   if (same) {
     // client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
   } else if (change) {
-    client.say(channel, `@${tags.username} changed their mind and wants to restart this game instead.. SeemsGood`)
+    client.say(channel, `@${tags.username} changed their mind and wants to restart ${games[state.currentGame].title} instead.. SeemsGood`)
   } else {
-    client.say(channel, `@${tags.username} wants to restart this game.. SeemsGood`)
+    client.say(channel, `@${tags.username} wants to restart ${games[state.currentGame].title}.. SeemsGood`)
   }
 }
 
@@ -181,9 +181,9 @@ function voteExit(channel, tags, message, self) {
   if (same) {
     // client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
   } else if (change) {
-    client.say(channel, `@${tags.username} changed their mind and wants to end this game instead.. SeemsGood`)
+    client.say(channel, `@${tags.username} changed their mind and dont't want to play ${games[state.currentGame].title} after all.. SeemsGood`)
   } else {
-    client.say(channel, `@${tags.username} don't want to play this game anymore.. SeemsGood`)
+    client.say(channel, `@${tags.username} don't want to play ${games[state.currentGame].title} anymore.. SeemsGood`)
   }
 }
 
@@ -207,9 +207,9 @@ function voteStay(channel, tags, message, self) {
   if (same) {
     // client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
   } else if (change) {
-    client.say(channel, `@${tags.username} changed their mind and wants to keep playing this game instead.. SeemsGood`)
+    client.say(channel, `@${tags.username} changed their mind and wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
   } else {
-    client.say(channel, `@${tags.username} wants to keep playing this game.. SeemsGood`)
+    client.say(channel, `@${tags.username} wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
   }
 }
 
@@ -232,15 +232,15 @@ function startQuitting(channel) {
     }
     let bestChoice = bestChoices[Math.floor(Math.random() * bestChoices.length)]
     if (bestChoice === "quit") {
-      client.say(channel, `It's decided! We're not playing this game anymore! ResidentSleeper`)
+      client.say(channel, `It's decided! We're not playing ${games[state.currentGame].title} anymore! ResidentSleeper`)
       process.exec(`start ./jackman.ahk exit`)
       state.state = "idle"
     } else if (bestChoice === "restart") {
-      client.say(channel, `It's decided! We're restarting the game! VoHiYo`)
+      client.say(channel, `It's decided! We're restarting ${games[state.currentGame].title}! VoHiYo`)
       process.exec(`start ./jackman.ahk restart`)
       state.state = "playing"
     } else {
-      client.say(channel, `It's decided! We'll continue playing this game! SoonerLater`)
+      client.say(channel, `It's decided! We'll continue playing ${games[state.currentGame].title}! SoonerLater`)
       process.exec(`start ./jackman.ahk continue`)
       state.state = "playing"
     }
@@ -276,9 +276,9 @@ function startVoting(channel) {
     state.state = "playing"
     setTimeout(() => {
       if (games[bestGame].playersMin > 1) {
-        client.say(channel, `At least ${games[bestGame].playersMin} players are needed for this game.. Invite some friends to the stream and have fun! PartyHat`)
+        client.say(channel, `At least ${games[bestGame].playersMin} players are needed for ${games[state.currentGame].title}.. Invite some friends to the stream and have fun! PartyHat`)
       } else {
-        client.say(channel, `You can play this game by yourself or wait for other players.. Up to you.. GunRun`)
+        client.say(channel, `You can play ${games[state.currentGame].title} by yourself or wait for other players.. Up to you.. GunRun`)
       }
     }, 1024 * 64 * 1)
     setTimeout(() => {
