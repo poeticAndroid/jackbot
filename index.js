@@ -38,6 +38,10 @@ client.on('message', (channel, tags, message, self) => {
         client.say(channel, `@${tags.username} greetings! HeyGuys`)
         break
 
+      case "!secret":
+        client.say(channel, `@${tags.username} congratulations! You found the secret command! Use it responsibly PowerUpL MingLee PowerUpR`)
+        break
+
       case "!help":
       case "!commands":
         client.say(channel, `!exit - vote for quiting the current game and play something else.`)
