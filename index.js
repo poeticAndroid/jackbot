@@ -58,6 +58,7 @@ client.on('message', (channel, tags, message, self) => {
         client.say(channel, `https://github.com/poeticAndroid/jackbot`)
         break
 
+      case "!game":
       case "!vote":
         voteGame(channel, tags, message, self)
         break
@@ -68,12 +69,12 @@ client.on('message', (channel, tags, message, self) => {
         voteExit(channel, tags, message, self)
         break
 
-      case "!play":
       case "!stay":
       case "!continue":
         voteStay(channel, tags, message, self)
         break
 
+      case "!reset":
       case "!restart":
         voteRestart(channel, tags, message, self)
         break
