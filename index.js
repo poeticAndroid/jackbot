@@ -44,11 +44,9 @@ client.on('message', (channel, tags, message, self) => {
 
       case "!help":
       case "!commands":
-        client.say(channel, `!exit - vote for quiting the current game and play something else.`)
-        client.say(channel, `!stay - vote for NOT quiting the current game and keep playing.`)
-        client.say(channel, `!restart - vote for restarting the current game.`)
-        client.say(channel, `!vote <game title> - Vote on a Jackbox game to play.`)
         client.say(channel, `!list - List all available games.`)
+        client.say(channel, `!vote <game title> - Vote on a Jackbox game to play.`)
+        client.say(channel, `!exit/!restart/!stay - vote for ending/restarting/keep playing the current game.`)
         client.say(channel, `!src - Link to source on Github.`)
         break
 
