@@ -28,7 +28,7 @@ client.on('message', (channel, tags, message, self) => {
   }
   if (self) return
   if (message.slice(0, 1) === '!') {
-    let cmd = message.trim().split(/\s+/)
+    let cmd = message.trim().toLowerCase().split(/\s+/)
     if (cmd[0] === "!") {
       cmd.shift()
       cmd[0] = "!" + cmd[0]
@@ -95,7 +95,7 @@ function listGames(channel, tags, message, self) {
 }
 
 function voteGame(channel, tags, message, self) {
-  let cmd = message.trim().split(/\s+/)
+  let cmd = message.trim().toLowerCase().split(/\s+/)
   if (!cmd[1]) {
     client.say(channel, `@${tags.username} forgot to give a title! Type '!vote' followed by the game title.. (or just some of it) BibleThump`)
     return
