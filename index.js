@@ -157,7 +157,7 @@ function voteRestart(channel, tags, message, self) {
   state.quitVotes[state.quitVoters[tags.username]] = state.quitVotes[state.quitVoters[tags.username]] || 0
   state.quitVotes[state.quitVoters[tags.username]]++
   if (same) {
-    // client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
+    client.say(channel, `@${tags.username} can't wait to start over! SeemsGood`)
   } else if (change) {
     client.say(channel, `@${tags.username} changed their mind and wants to restart ${games[state.currentGame].title} instead.. SeemsGood`)
   } else {
@@ -183,7 +183,7 @@ function voteExit(channel, tags, message, self) {
   state.quitVotes[state.quitVoters[tags.username]] = state.quitVotes[state.quitVoters[tags.username]] || 0
   state.quitVotes[state.quitVoters[tags.username]]++
   if (same) {
-    // client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
+    client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
   } else if (change) {
     client.say(channel, `@${tags.username} changed their mind and dont't want to play ${games[state.currentGame].title} after all.. SeemsGood`)
   } else {
@@ -209,7 +209,7 @@ function voteStay(channel, tags, message, self) {
   state.quitVotes[state.quitVoters[tags.username]] = state.quitVotes[state.quitVoters[tags.username]] || 0
   state.quitVotes[state.quitVoters[tags.username]]++
   if (same) {
-    // client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
+    client.say(channel, `@${tags.username} really likes this game! SeemsGood`)
   } else if (change) {
     client.say(channel, `@${tags.username} changed their mind and wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
   } else {
