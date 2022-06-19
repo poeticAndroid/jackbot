@@ -107,15 +107,21 @@ function voteGame(channel, tags, message, self) {
   let game = games[gameId]
   if (game) {
     let same = state.gameVoters[tags.username] === gameId
-    let change = false
+    let change, alreadyPlaying
     if (state.gameVoters[tags.username]) {
       state.gameVotes[state.gameVoters[tags.username]]--
       change = true
     }
-    state.gameVoters[tags.username] = gameId
-    state.gameVotes[state.gameVoters[tags.username]] = state.gameVotes[state.gameVoters[tags.username]] || 0
-    state.gameVotes[state.gameVoters[tags.username]]++
-    if (same) {
+    if (state.state === "playing" && state.currentGame === gameId) {
+      alreadyPlaying = true
+    } else {
+      state.gameVoters[tags.username] = gameId
+      state.gameVotes[state.gameVoters[tags.username]] = state.gameVotes[state.gameVoters[tags.username]] || 0
+      state.gameVotes[state.gameVoters[tags.username]]++
+    }
+    if (alreadyPlaying) {
+      client.say(channel, `@${tags.username} we're already playing ${game.title}! Did you mean to '!restart' it?`)
+    } else if (same) {
       client.say(channel, `@${tags.username} dont worry. I haven't forgotten your vote for ${game.title}! SeemsGood`)
     } else if (change) {
       client.say(channel, `@${tags.username} changed their mind and would rather play ${game.title} instead. SeemsGood`)
