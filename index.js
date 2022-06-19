@@ -315,7 +315,7 @@ function resolveGame(words) {
   for (let word of words) {
     let newresult = []
     for (let game of result) {
-      if (game.title.toLowerCase().replaceAll(" ", "").includes(word.toLowerCase())) {
+      if (game.title.toLowerCase().replace(/[^\w]/g, "").includes(word.toLowerCase().replace(/[^\w]/g, ""))) {
         newresult.push(game)
       }
     }
