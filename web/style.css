@@ -40,6 +40,11 @@ html.voting-state {
   width: 90%;
 }
 
+.voting .count {
+  text-align: right;
+  padding-left: 1em;
+}
+
 .quitting-state #quit-voting {
   top: 25vh;
 }
