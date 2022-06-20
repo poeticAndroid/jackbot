@@ -17,7 +17,7 @@ setInterval(() => {
       location.reload(true)
     }, 4096)
   })
-}, 1024)
+}, 1000)
 
 function tick(_state) {
   document.querySelector("#debug").textContent = JSON.stringify(_state, null, 2)
@@ -38,18 +38,22 @@ function updateQuitVotes(votes, count) {
     document.querySelector("#quit-voting meter").value = 0
     return
   }
-  document.querySelector("#quit-votes").dataset.count = votes.quit || 0
-  document.querySelector("#quit-votes .count").textContent = document.querySelector("#quit-votes").dataset.count
-  document.querySelector("#restart-votes").dataset.count = votes.restart || 0
-  document.querySelector("#restart-votes .count").textContent = document.querySelector("#restart-votes").dataset.count
-  document.querySelector("#continue-votes").dataset.count = votes.continue || 0
-  document.querySelector("#continue-votes .count").textContent = document.querySelector("#continue-votes").dataset.count
-  let lastEl
-  for (let el of document.querySelectorAll("#quit-voting tbody tr")) {
-    if (lastEl && (parseFloat(lastEl.dataset.count) < parseFloat(el.dataset.count))) {
-      document.querySelector("#quit-voting tbody").insertBefore(el, lastEl)
+  for (let opt of ["quit", "restart", "continue"]) {
+    let el = document.getElementById(opt + "-votes")
+    if (!el) {
+      el = document.createElement("tr")
+      el.id = opt + "-votes"
+      el.innerHTML = `<td><code>!${opt}</code></td><td class="count">?</td>`
+      document.querySelector("#quit-voting tbody").appendChild(el)
     }
-    lastEl = el
+    el.dataset.count = votes[opt] || 0
+    el.querySelector(".count").textContent = el.dataset.count
+  }
+  let els = [].concat(...document.querySelectorAll("#quit-voting tbody tr"))
+  els.sort((a, b) => { return parseFloat(b.dataset.count) - parseFloat(a.dataset.count) })
+  for (let el of els) {
+    document.querySelector("#quit-voting tbody").removeChild(el)
+    document.querySelector("#quit-voting tbody").appendChild(el)
   }
 }
 function updateGameVotes(votes, count) {
@@ -61,21 +65,20 @@ function updateGameVotes(votes, count) {
     return
   }
   for (let game in votes) {
-    let el = document.getElementById(game + "-gamevote")
+    let el = document.getElementById(game + "-gamevotes")
     if (!el) {
       el = document.createElement("tr")
-      el.id = game + "-gamevote"
+      el.id = game + "-gamevotes"
       el.innerHTML = `<td>${games[game].title}</td><td class="count">?</td>`
       document.querySelector("#game-voting tbody").appendChild(el)
     }
     el.dataset.count = votes[game] || 0
     el.querySelector(".count").textContent = el.dataset.count
   }
-  let lastEl
-  for (let el of document.querySelectorAll("#game-voting tbody tr")) {
-    if (lastEl && (parseFloat(lastEl.dataset.count) < parseFloat(el.dataset.count))) {
-      document.querySelector("#game-voting tbody").insertBefore(el, lastEl)
-    }
-    lastEl = el
+  let els = [].concat(...document.querySelectorAll("#game-voting tbody tr"))
+  els.sort((a, b) => { return parseFloat(b.dataset.count) - parseFloat(a.dataset.count) })
+  for (let el of els) {
+    document.querySelector("#game-voting tbody").removeChild(el)
+    document.querySelector("#game-voting tbody").appendChild(el)
   }
 }
