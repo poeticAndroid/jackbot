@@ -45,6 +45,10 @@ html.voting-state {
   padding-left: 1em;
 }
 
+.voting .top {
+  color: #0f0;
+}
+
 .quitting-state #quit-voting {
   top: 25vh;
 }

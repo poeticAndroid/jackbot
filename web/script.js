@@ -38,6 +38,7 @@ function updateQuitVotes(votes, count) {
     document.querySelector("#quit-voting meter").value = 0
     return
   }
+  let highest = -1
   for (let opt of ["quit", "restart", "continue"]) {
     let el = document.getElementById(opt + "-votes")
     if (!el) {
@@ -48,10 +49,13 @@ function updateQuitVotes(votes, count) {
     }
     el.dataset.count = votes[opt] || 0
     el.querySelector(".count").textContent = el.dataset.count
+    if (highest < parseFloat(el.dataset.count)) highest = parseFloat(el.dataset.count)
   }
   let els = [].concat(...document.querySelectorAll("#quit-voting tbody tr"))
   els.sort((a, b) => { return parseFloat(b.dataset.count) - parseFloat(a.dataset.count) })
   for (let el of els) {
+    if (highest <= parseFloat(el.dataset.count)) el.classList.add("top")
+    else el.classList.remove("top")
     document.querySelector("#quit-voting tbody").removeChild(el)
     document.querySelector("#quit-voting tbody").appendChild(el)
   }
@@ -64,6 +68,7 @@ function updateGameVotes(votes, count) {
     document.querySelector("#game-voting tbody").innerHTML = ""
     return
   }
+  let highest = -1
   for (let game in votes) {
     let el = document.getElementById(game + "-gamevotes")
     if (!el) {
@@ -74,10 +79,13 @@ function updateGameVotes(votes, count) {
     }
     el.dataset.count = votes[game] || 0
     el.querySelector(".count").textContent = el.dataset.count
+    if (highest < parseFloat(el.dataset.count)) highest = parseFloat(el.dataset.count)
   }
   let els = [].concat(...document.querySelectorAll("#game-voting tbody tr"))
   els.sort((a, b) => { return parseFloat(b.dataset.count) - parseFloat(a.dataset.count) })
   for (let el of els) {
+    if (highest <= parseFloat(el.dataset.count)) el.classList.add("top")
+    else el.classList.remove("top")
     document.querySelector("#game-voting tbody").removeChild(el)
     document.querySelector("#game-voting tbody").appendChild(el)
   }
