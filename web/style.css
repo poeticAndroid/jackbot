@@ -16,6 +16,7 @@ html.voting-state {
   top: -50vh;
   left: 50vw;
   transition: top 1s;
+  opacity: 75%;
 }
 
 .voting table {
@@ -24,7 +25,7 @@ html.voting-state {
   top: -50%;
   left: -50%;
 
-  background-color: rgba(0, 0, 0, 75%);
+  background-color: #000;
   color: #ccc;
   box-shadow: 0 0 1em #333;
   border-radius: 0.25em;
