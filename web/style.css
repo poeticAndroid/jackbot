@@ -4,8 +4,8 @@ html {
   font-size: 2vh;
 }
 
-html.idle,
-html.voting {
+html.idle-state,
+html.voting-state {
   background-image: url("./idle.png");
   background-position: center center;
   background-size: cover;
@@ -28,7 +28,7 @@ html.voting {
   color: #ccc;
   box-shadow: 0 0 1em #333;
   border-radius: 1em;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   padding: 0.25em 0.5em;
 }
 
@@ -40,8 +40,12 @@ html.voting {
   width: 90%;
 }
 
-.quitting #quit-voting {
-  top: 33vh;
+.quitting-state #quit-voting {
+  top: 25vh;
+}
+
+.voting-state #game-voting {
+  top: 25vh;
 }
 
 #debug {
