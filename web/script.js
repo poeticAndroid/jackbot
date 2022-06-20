@@ -53,13 +53,21 @@ function updateGameVotes(votes, count) {
   for (let game in votes) {
     let el = document.getElementById(game + "-gamevote")
     if (el) {
-      el.querySelector(".count").textContent = votes[game] || 0
+      el.dataset.count = votes[game] || 0
+      el.querySelector(".count").textContent = el.dataset.count
     } else {
       el = document.createElement("tr")
       el.id = game + "-gamevote"
       el.innerHTML = `<td>${games[game].title}</td><td class="count">?</td>`
       document.querySelector("#game-voting tbody").appendChild(el)
     }
+  }
+  let lastEl
+  for (let el of document.querySelectorAll("#game-voting tbody")) {
+    if (lastEl && (parseFloat(lastEl.dataset.count) < parseFloat(el.dataset.count))) {
+      el.insertBefore(lastEl)
+    }
+    lastEl = el
   }
 
 }
