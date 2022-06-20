@@ -32,16 +32,24 @@ function tick(_state) {
 }
 
 function updateQuitVotes(votes, count) {
-  document.querySelector("#quit-votes .count").textContent = votes.quit || 0
-  document.querySelector("#restart-votes .count").textContent = votes.restart || 0
-  document.querySelector("#continue-votes .count").textContent = votes.continue || 0
   if (count) {
     document.querySelector("#quit-voting meter").value++
   } else {
     document.querySelector("#quit-voting meter").value = 0
+    return
   }
+  document.querySelector("#quit-votes .count").textContent = votes.quit || 0
+  document.querySelector("#restart-votes .count").textContent = votes.restart || 0
+  document.querySelector("#continue-votes .count").textContent = votes.continue || 0
 }
 function updateGameVotes(votes, count) {
+  if (count) {
+    document.querySelector("#game-voting meter").value++
+  } else {
+    document.querySelector("#game-voting meter").value = 0
+    document.querySelector("#game-voting tbody").innerHTML = ""
+    return
+  }
   for (let game in votes) {
     let el = document.getElementById(game + "-gamevote")
     if (el) {
@@ -54,10 +62,4 @@ function updateGameVotes(votes, count) {
     }
   }
 
-  if (count) {
-    document.querySelector("#game-voting meter").value++
-  } else {
-    document.querySelector("#game-voting meter").value = 0
-    document.querySelector("#game-voting tbody").innerHTML = ""
-  }
 }
