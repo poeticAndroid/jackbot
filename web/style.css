@@ -13,7 +13,7 @@ html.voting-state {
 
 .voting {
   position: absolute;
-  top: 150vh;
+  top: -50vh;
   left: 50vw;
   transition: top 1s;
 }
@@ -24,7 +24,7 @@ html.voting-state {
   top: -50%;
   left: -50%;
 
-  background-color: rgba(0, 0, 0, 66%);
+  background-color: rgba(0, 0, 0, 75%);
   color: #ccc;
   box-shadow: 0 0 1em #333;
   border-radius: 1em;
