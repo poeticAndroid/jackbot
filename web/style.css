@@ -13,7 +13,7 @@ html.voting-state {
 
 .voting {
   position: absolute;
-  top: -100vh;
+  top: 150vh;
   left: 50vw;
   transition: top 1s;
 }
