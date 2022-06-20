@@ -27,7 +27,7 @@ html.voting-state {
   background-color: rgba(0, 0, 0, 75%);
   color: #ccc;
   box-shadow: 0 0 1em #333;
-  border-radius: 1em;
+  border-radius: 0.25em;
   border: 2px solid #fff;
   padding: 0.25em 0.5em;
 }
