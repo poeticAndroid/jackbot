@@ -1,5 +1,7 @@
 html {
   min-height: 100vh;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 2vh;
 }
 
 html.idle,
@@ -7,4 +9,41 @@ html.voting {
   background-image: url("./idle.png");
   background-position: center center;
   background-size: cover;
+}
+
+.voting {
+  position: absolute;
+  top: -100vh;
+  left: 50vw;
+  transition: top 1s;
+}
+
+.voting table {
+  min-width: 10em;
+  position: relative;
+  top: -50%;
+  left: -50%;
+
+  background-color: rgba(0, 0, 0, 66%);
+  color: #ccc;
+  box-shadow: 0 0 1em #333;
+  border-radius: 1em;
+  border: 1px solid #fff;
+  padding: 0.25em 0.5em;
+}
+
+.voting thead {
+  color: #fff;
+}
+
+.voting meter {
+  width: 90%;
+}
+
+.quitting #quit-voting {
+  top: 33vh;
+}
+
+#debug {
+  display: none;
 }

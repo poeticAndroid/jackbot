@@ -6,10 +6,44 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <title>Document</title>
+  <title>Jackbot</title>
 </head>
 
 <body>
+  <pre id="debug"></pre>
+  <article class="voting" id="quit-voting">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">Game over?</th>
+        </tr>
+        <tr>
+          <th colspan="2"><meter value="0" min="0" max="60"></meter></div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="quit-votes">
+          <td>
+            <code>!exit</code>
+          </td>
+          <td class="count">?</td>
+        </tr>
+        <tr id="restart-votes">
+          <td>
+            <code>!restart</code>
+          </td>
+          <td class="count">?</td>
+        </tr>
+        <tr id="continue-votes">
+          <td>
+            <code>!stay</code>
+          </td>
+          <td class="count">?</td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
   <script src="./games.js"></script>
   <script src="./script.js"></script>
 </body>
