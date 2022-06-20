@@ -38,9 +38,19 @@ function updateQuitVotes(votes, count) {
     document.querySelector("#quit-voting meter").value = 0
     return
   }
-  document.querySelector("#quit-votes .count").textContent = votes.quit || 0
-  document.querySelector("#restart-votes .count").textContent = votes.restart || 0
-  document.querySelector("#continue-votes .count").textContent = votes.continue || 0
+  document.querySelector("#quit-votes").dataset.count = votes.quit || 0
+  document.querySelector("#quit-votes .count").textContent = document.querySelector("#quit-votes").dataset.count
+  document.querySelector("#restart-votes").dataset.count = votes.restart || 0
+  document.querySelector("#restart-votes .count").textContent = document.querySelector("#restart-votes").dataset.count
+  document.querySelector("#continue-votes").dataset.count = votes.continue || 0
+  document.querySelector("#continue-votes .count").textContent = document.querySelector("#continue-votes").dataset.count
+  let lastEl
+  for (let el of document.querySelectorAll("#quit-voting tbody tr")) {
+    if (lastEl && (parseFloat(lastEl.dataset.count) < parseFloat(el.dataset.count))) {
+      document.querySelector("#quit-voting tbody").insertBefore(el, lastEl)
+    }
+    lastEl = el
+  }
 }
 function updateGameVotes(votes, count) {
   if (count) {
@@ -52,22 +62,20 @@ function updateGameVotes(votes, count) {
   }
   for (let game in votes) {
     let el = document.getElementById(game + "-gamevote")
-    if (el) {
-      el.dataset.count = votes[game] || 0
-      el.querySelector(".count").textContent = el.dataset.count
-    } else {
+    if (!el) {
       el = document.createElement("tr")
       el.id = game + "-gamevote"
       el.innerHTML = `<td>${games[game].title}</td><td class="count">?</td>`
       document.querySelector("#game-voting tbody").appendChild(el)
     }
+    el.dataset.count = votes[game] || 0
+    el.querySelector(".count").textContent = el.dataset.count
   }
   let lastEl
-  for (let el of document.querySelectorAll("#game-voting tbody")) {
+  for (let el of document.querySelectorAll("#game-voting tbody tr")) {
     if (lastEl && (parseFloat(lastEl.dataset.count) < parseFloat(el.dataset.count))) {
-      el.insertBefore(lastEl)
+      document.querySelector("#game-voting tbody").insertBefore(el, lastEl)
     }
     lastEl = el
   }
-
 }
