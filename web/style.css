@@ -16,7 +16,7 @@ html.voting-state {
   top: -50vh;
   left: 50vw;
   transition: top 1s;
-  opacity: 75%;
+  opacity: 85%;
 }
 
 .voting table {
