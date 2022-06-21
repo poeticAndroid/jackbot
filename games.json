@@ -49,7 +49,7 @@
     "playersMax": 8
   },
   "draw": {
-    "title": "Drawful (Classic)",
+    "title": "Drawful 1",
     "pack": 1,
     "game": 5,
     "playersMin": 3,
@@ -231,7 +231,7 @@
     "playersMax": 8
   },
   "triv": {
-    "title": "Trivia Murder Party (Classic)",
+    "title": "Trivia Murder Party 1",
     "pack": 3,
     "game": 2,
     "playersMin": 1,
