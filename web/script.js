@@ -1,4 +1,5 @@
 let state
+let hands = ["✊", "☝", "🤘", "🤟", "✋", "🖐", "🖖", "👏", "🙏", "🙌"]
 
 setInterval(() => {
   fetch("./state.json").then(resp => {
@@ -48,7 +49,7 @@ function updateQuitVotes(votes, count) {
       document.querySelector("#quit-voting tbody").appendChild(el)
     }
     el.dataset.count = votes[opt] || 0
-    el.querySelector(".count").textContent = (parseFloat(el.dataset.count) ? "✋" : "") + el.dataset.count
+    el.querySelector(".count").textContent = (parseFloat(el.dataset.count) ? hands[parseInt(el.dataset.count)] : "") + el.dataset.count
     if (highest < parseFloat(el.dataset.count)) highest = parseFloat(el.dataset.count)
   }
   if (highest === 0) highest--
@@ -80,7 +81,7 @@ function updateGameVotes(votes, count) {
       document.querySelector("#game-voting tbody").appendChild(el)
     }
     el.dataset.count = votes[game] || 0
-    el.querySelector(".count").textContent = (parseFloat(el.dataset.count) ? "✋" : "") + el.dataset.count
+    el.querySelector(".count").textContent = (parseFloat(el.dataset.count) ? hands[parseInt(el.dataset.count)] : "") + el.dataset.count
     if (highest < parseFloat(el.dataset.count)) highest = parseFloat(el.dataset.count)
   }
   if (highest === 0) highest--
