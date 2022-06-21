@@ -50,8 +50,18 @@ html.voting-state {
   color: #3c6;
 }
 
+
+#game-voting {
+  /* left: 66%; */
+}
+
 .quitting-state #quit-voting {
   top: 25vh;
+}
+
+.quitting-state #game-voting,
+.idle-state #game-voting {
+  top: 50vh;
 }
 
 .voting-state #game-voting {

@@ -68,7 +68,7 @@ function updateGameVotes(votes, count) {
   } else {
     document.querySelector("#game-voting meter").value = 0
     document.querySelector("#game-voting tbody").innerHTML = ""
-    return
+    // return
   }
   let highest = -1
   for (let game in votes) {
