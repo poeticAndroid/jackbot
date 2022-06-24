@@ -12,7 +12,8 @@ const state = {
   gameVoters: {},
   quitVotes: {},
   quitVoters: {},
-  chatters: []
+  chatters: [],
+  partyGoers: []
 }
 const client = new tmi.Client(config)
 let loneliness, exitReminder
@@ -84,6 +85,9 @@ client.on('message', (channel, tags, message, self) => {
         voteRestart(channel, tags, message, self)
         break
 
+      case "!party":
+        joinParty(channel, tags, message, self)
+        break
     }
   }
 })
@@ -217,6 +221,28 @@ function voteStay(channel, tags, message, self) {
     client.say(channel, `@${tags.username} changed their mind and wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
   } else {
     client.say(channel, `@${tags.username} wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
+  }
+}
+
+function joinParty(channel, tags, message, self) {
+  let now = new Date()
+  let minutes = 60 - now.getMinutes()
+  let i = state.partyGoers.indexOf(tags.username)
+  if (now.getMinutes() < 5) {
+    client.say(channel, `@${tags.username} Welcome to the party! PartyTime`)
+  } else if (i < 0) {
+    client.say(channel, `@${tags.username} you're coming to the party? That's great! We'll see you back here in ${minutes} minutes then! Bring snacks and drinks! PartyTime`)
+    state.partyGoers.push(tags.username)
+    if (state.partyGoers.length === 1) {
+      setTimeout(() => {
+        state.partyGoers = []
+        if (state.state === "playing") {
+          startQuitting(config.channels[0])
+        }
+      }, 1000 * 60 * minutes)
+    }
+  } else {
+    client.say(channel, `@${tags.username} excited for the party? That's great! We'll see you back here in ${minutes} minutes then! Bring snacks and drinks! PartyTime`)
   }
 }
 

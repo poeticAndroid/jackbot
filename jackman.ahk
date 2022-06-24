@@ -80,7 +80,7 @@ StartGame(pack, game) {
 
   Sleep, 1024
   Enter()
-  Sleep, 4096
+  ; Sleep, 4096
 
   While (WinActive("The Jackbox Party Pack")) {
     Enter()

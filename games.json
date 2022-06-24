@@ -74,7 +74,8 @@
     "pack": 3,
     "game": 4,
     "playersMin": 3,
-    "playersMax": 6
+    "playersMax": 6,
+    "presence": true
   },
   "fib2": {
     "title": "Fibbage 2",
