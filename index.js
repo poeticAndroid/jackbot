@@ -283,8 +283,8 @@ function startQuitting(channel) {
 }
 function startVoting(channel) {
   state.state = "voting"
-  client.say(channel, `Type '!list' to see a list of all available games. Read more about each game at https://www.jackboxgames.com/games/`)
-  client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play! You have one minute left to vote, if you haven't already!`)
+  // client.say(channel, `Type '!list' to see a list of all available games. Read more about each game at https://www.jackboxgames.com/games/`)
+  client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play! You have 10 seconds left to vote, if you haven't already!`)
   setTimeout(() => {
     let bestGames = []
     let bestVotes = 0
@@ -323,7 +323,7 @@ function startVoting(channel) {
     state.gameVotes = {}
     state.gameVoters = {}
     state.chatters = []
-  }, 60000)
+  }, 10000)
 }
 
 setInterval(() => {
