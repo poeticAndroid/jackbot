@@ -19,10 +19,11 @@ let loneliness, exitReminder
 
 client.connect().catch(console.error)
 client.on('message', (channel, tags, message, self) => {
+  state.idleSince = Date.now()
   clearTimeout(loneliness)
   loneliness = setInterval(() => {
     lonely(channel)
-  }, 1024 * 64 * 16)
+  }, 1000 * 60 * 15)
   if (!state.chatters.includes(tags.username)) {
     state.chatters.push(tags.username)
   }
@@ -76,6 +77,8 @@ client.on('message', (channel, tags, message, self) => {
         voteStay(channel, tags, message, self)
         break
 
+      case "!play":
+      case "!start":
       case "!reset":
       case "!restart":
         voteRestart(channel, tags, message, self)
