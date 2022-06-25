@@ -53,7 +53,10 @@ function updateQuitVotes(votes, count, max) {
     el.querySelector(".count").textContent = (parseFloat(el.dataset.count) ? hands[parseInt(el.dataset.count)] : "") + el.dataset.count
     if (highest < parseFloat(el.dataset.count)) highest = parseFloat(el.dataset.count)
   }
-  if (highest === 0) highest--
+  if (highest === 0) {
+    document.getElementById("quit-votes").dataset.count = 1
+    highest++
+  }
   let els = [].concat(...document.querySelectorAll("#quit-voting tbody tr"))
   els.sort((a, b) => { return parseFloat(b.dataset.count) - parseFloat(a.dataset.count) + Math.random() - .5 })
   for (let el of els) {
@@ -62,7 +65,6 @@ function updateQuitVotes(votes, count, max) {
     document.querySelector("#quit-voting tbody").removeChild(el)
     document.querySelector("#quit-voting tbody").appendChild(el)
   }
-  if (highest < 0) document.getElementById("quit-votes").classList.add("top")
 }
 function updateGameVotes(votes, count, max) {
   if (count) {
