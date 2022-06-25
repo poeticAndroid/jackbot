@@ -28,15 +28,16 @@ function tick(_state) {
   state = _state
   document.querySelector("html").classList.add(state.state + "-state")
 
-  updateQuitVotes(state.quitVotes, state.state === "quitting")
-  updateGameVotes(state.gameVotes, state.state === "voting")
+  updateQuitVotes(state.quitVotes, state.state === "quitting", state.quitVoteTime)
+  updateGameVotes(state.gameVotes, state.state === "voting", state.gameVoteTime)
 }
 
-function updateQuitVotes(votes, count) {
+function updateQuitVotes(votes, count, max) {
   if (count) {
     document.querySelector("#quit-voting meter").value++
   } else {
     document.querySelector("#quit-voting meter").value = 0
+    document.querySelector("#quit-voting meter").max = max
     return
   }
   let highest = -1
@@ -63,11 +64,12 @@ function updateQuitVotes(votes, count) {
   }
   if (highest < 0) document.getElementById("quit-votes").classList.add("top")
 }
-function updateGameVotes(votes, count) {
+function updateGameVotes(votes, count, max) {
   if (count) {
     document.querySelector("#game-voting meter").value++
   } else {
     document.querySelector("#game-voting meter").value = 0
+    document.querySelector("#game-voting meter").max = max
     document.querySelector("#game-voting tbody").innerHTML = ""
     // return
   }

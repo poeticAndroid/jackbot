@@ -8,8 +8,10 @@ process.exec(`start ./jackman.ahk exit`)
 
 const state = {
   state: "idle",
+  gameVoteTime: 60,
   gameVotes: {},
   gameVoters: {},
+  quitVoteTime: 60,
   quitVotes: {},
   quitVoters: {},
   chatters: [],
@@ -125,6 +127,7 @@ function voteGame(channel, tags, message, self) {
       state.gameVoters[tags.username] = gameId
       state.gameVotes[state.gameVoters[tags.username]] = state.gameVotes[state.gameVoters[tags.username]] || 0
       state.gameVotes[state.gameVoters[tags.username]]++
+      state.gameVoteTime = 10
     }
     if (alreadyPlaying) {
       client.say(channel, `@${tags.username} we're already playing ${game.title}! Did you mean to '!restart' it?`)
@@ -279,7 +282,7 @@ function startQuitting(channel) {
     }
     state.quitVotes = {}
     state.quitVoters = {}
-  }, 60000)
+  }, 1000 * state.quitVoteTime)
 }
 function startVoting(channel) {
   state.state = "voting"
@@ -323,7 +326,8 @@ function startVoting(channel) {
     state.gameVotes = {}
     state.gameVoters = {}
     state.chatters = []
-  }, 10000)
+    state.gameVoteTime = 60
+  }, 1000 * state.gameVoteTime)
 }
 
 setInterval(() => {
