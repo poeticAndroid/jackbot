@@ -55,7 +55,7 @@ function updateQuitVotes(votes, count, max) {
   }
   if (highest === 0) highest--
   let els = [].concat(...document.querySelectorAll("#quit-voting tbody tr"))
-  els.sort((a, b) => { return parseFloat(b.dataset.count) - parseFloat(a.dataset.count) })
+  els.sort((a, b) => { return parseFloat(b.dataset.count) - parseFloat(a.dataset.count) + Math.random() - .5 })
   for (let el of els) {
     if (highest === parseFloat(el.dataset.count)) el.classList.add("top")
     else el.classList.remove("top")
@@ -88,7 +88,7 @@ function updateGameVotes(votes, count, max) {
   }
   if (highest === 0) highest--
   let els = [].concat(...document.querySelectorAll("#game-voting tbody tr"))
-  els.sort((a, b) => { return parseFloat(b.dataset.count) - parseFloat(a.dataset.count) })
+  els.sort((a, b) => { return parseFloat(b.dataset.count) - parseFloat(a.dataset.count) + Math.random() - .5 })
   for (let el of els) {
     if (highest === parseFloat(el.dataset.count)) el.classList.add("top")
     else el.classList.remove("top")
