@@ -8,7 +8,7 @@ process.exec(`start ./jackman.ahk exit`)
 
 const state = {
   state: "idle",
-  gameVoteTime: 60,
+  gameVoteTime: 120,
   gameVotes: {},
   gameVoters: {},
   quitVoteTime: 60,
