@@ -74,13 +74,9 @@ StartGame(pack, game) {
   Sleep, 10000
 
   Loop, %game% {
-    Sleep, 256
     Down()
+    Sleep, 256
   }
-
-  Sleep, 1024
-  Enter()
-  ; Sleep, 4096
 
   While (WinActive("The Jackbox Party Pack")) {
     Enter()
