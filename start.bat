@@ -1,6 +1,9 @@
+@echo off
 echo update bot ...
 call git pull
 echo installing modules ...
 call npm install
 echo starting Twitch bot ...
 call node index.js
+echo Restarting
+shutdown /r
