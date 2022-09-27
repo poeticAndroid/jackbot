@@ -1,3 +1,10 @@
+{
+  const fs = require("fs")
+  if (!fs.existsSync("./parties.json")) {
+    fs.writeFileSync("./parties.json", "[]")
+  }
+}
+
 const
   tmi = require('tmi.js'),
   config = require("./config.json"),
@@ -15,13 +22,15 @@ const state = {
   quitVotes: {},
   quitVoters: {},
   chatters: [],
-  partyGoers: []
+  parties: require("./parties.json"),
+  partyGuests: []
 }
 const client = new tmi.Client(config)
 let loneliness, exitReminder
 
 client.connect().catch(console.error)
 client.on('message', (channel, tags, message, self) => {
+  lastParty().length = 0
   state.idleSince = Date.now()
   clearTimeout(loneliness)
   loneliness = setInterval(() => {
@@ -29,6 +38,11 @@ client.on('message', (channel, tags, message, self) => {
   }, 1000 * 60 * 15)
   if (!state.chatters.includes(tags.username)) {
     state.chatters.push(tags.username)
+  }
+  if (thisParty().includes(tags.username)) {
+    thisParty().splice(thisParty().indexOf(tags.username), 1)
+    state.partyGuests.push(tags.username)
+    client.say(channel, `@${tags.username} welcome to the party! So glad you could come! PartyTime`)
   }
   if (self) return
   if (message.slice(0, 1) === '!') {
@@ -48,9 +62,12 @@ client.on('message', (channel, tags, message, self) => {
 
       case "!help":
       case "!commands":
+        let now = new Date()
+        let minutes = 60 - now.getMinutes()
         client.say(channel, `!list - List all available games.`)
         client.say(channel, `!vote <game title> - Vote on a Jackbox game to play.`)
         client.say(channel, `!exit/!restart/!stay - vote for ending/restarting/keep playing the current game.`)
+        client.say(channel, `!party - Promise to be back here in ${minutes} minutes for the next party!`)
         client.say(channel, `!src - Link to source on Github.`)
         break
 
@@ -228,25 +245,19 @@ function voteStay(channel, tags, message, self) {
 }
 
 function joinParty(channel, tags, message, self) {
+  let party = nextParty()
   let now = new Date()
   let minutes = 60 - now.getMinutes()
-  let i = state.partyGoers.indexOf(tags.username)
-  if (now.getMinutes() < 5) {
+  let i = party.indexOf(tags.username)
+  if (now.getMinutes() < 1) {
     client.say(channel, `@${tags.username} Welcome to the party! PartyTime`)
   } else if (i < 0) {
-    client.say(channel, `@${tags.username} you're coming to the party? That's great! We'll see you back here in ${minutes} minutes then! Bring snacks and drinks! PartyTime`)
-    state.partyGoers.push(tags.username)
-    if (state.partyGoers.length === 1) {
-      setTimeout(() => {
-        state.partyGoers = []
-        if (state.state === "playing") {
-          startQuitting(config.channels[0])
-        }
-      }, 1000 * 60 * minutes)
-    }
+    client.say(channel, `@${tags.username} you're coming to the party? That's great! We'll see you back here in ${minutes} minutes! Bring snacks and drinks! PartyTime`)
+    party.push(tags.username)
   } else {
-    client.say(channel, `@${tags.username} excited for the party? That's great! We'll see you back here in ${minutes} minutes then! Bring snacks and drinks! PartyTime`)
+    client.say(channel, `@${tags.username} excited for the party? That's great! We'll see you back here in ${minutes} minutes! Bring snacks and drinks! PartyTime`)
   }
+  fs.writeFileSync("./parties.json", JSON.stringify(state.parties, null, 2))
 }
 
 function startQuitting(channel) {
@@ -365,6 +376,26 @@ function resolveGame(words) {
   return bestGame.id
 }
 
+function lastParty() {
+  let now = new Date()
+  let hour = now.getHours() - 1
+  if (hour < 0) hour = 23
+  state.parties[hour] = state.parties[hour] || []
+  return state.parties[hour]
+}
+function nextParty() {
+  let now = new Date()
+  let hour = now.getHours() + 1
+  if (hour > 23) hour = 0
+  state.parties[hour] = state.parties[hour] || []
+  return state.parties[hour]
+}
+function thisParty() {
+  let now = new Date()
+  let hour = now.getHours()
+  state.parties[hour] = state.parties[hour] || []
+  return state.parties[hour]
+}
 
 
 /// web server ///
@@ -381,7 +412,9 @@ const server = http.createServer((req, res) => {
   if (file === "/state.json") {
     res.setHeader("Content-Type", "application/json; charset=utf-8")
     res.statusCode = 200
-    return res.end(JSON.stringify(state, null, 2))
+    let json = JSON.stringify(state, null, 2)
+    state.partyGuests = []
+    return res.end(json)
   }
   if (file === "/games.js") {
     res.setHeader("Content-Type", "application/javascript; charset=utf-8")
