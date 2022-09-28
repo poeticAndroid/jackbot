@@ -103,32 +103,34 @@ function updateGameVotes(votes, count, max) {
 function updatePartyTicker(parties = []) {
   let now = new Date()
   let minutesLeft = 60 - now.getMinutes()
-  let hour = now.getHours() + 1
+  let hour = now.getHours()
+  let thisParty = markupNames(state.parties[hour] || [])
+  hour++
   if (hour > 23) hour = 0
   let nextParty = markupNames(state.parties[hour] || [])
 
   let el = document.querySelector("#partyTicker")
   if (minutesLeft > 59) {
-    el.innerHTML = `🎉🎉🎉 It's party time! 🎉🎉🎉`
     el.classList.add("partyTime")
+  } else {
+    el.classList.remove("partyTime")
+  }
+  if (minutesLeft > 59) {
+    el.innerHTML = ` 🎉 🎉 🎉 It's <code>!party</code> time! 🎉 🎉 🎉 `
   } else if (minutesLeft < 2) {
     el.innerHTML = `The <code>!party</code> is about to start! 😲`
-    el.classList.remove("partyTime")
-  } else if (nextParty.length > 1) {
-    el.innerHTML = `Next <code>!party</code> starts in ${minutesLeft} minutes! ${listify(nextParty)} are coming!`
-    el.classList.remove("partyTime")
+  } else if (minutesLeft > 50 && thisParty.length) {
+    el.innerHTML = `The <code>!party</code> has begun! Waiting for ${listify(thisParty)} to arrive...`
   } else if (nextParty.length) {
-    el.innerHTML = `Next <code>!party</code> starts in ${minutesLeft} minutes! ${listify(nextParty)} is coming!`
-    el.classList.remove("partyTime")
+    el.innerHTML = `The next <code>!party</code> starts in ${minutesLeft} minutes! ${listify(nextParty)} will be here!`
   } else {
-    el.innerHTML = `Next <code>!party</code> starts in ${minutesLeft} minutes! Are you coming?`
-    el.classList.remove("partyTime")
+    el.innerHTML = `The next <code>!party</code> starts in ${minutesLeft} minutes! Are you coming?`
   }
 }
 
 function markupNames(names) {
   for (let i = 0; i < names.length; i++) {
-    names[i] = `<span class="name">` + names[i] + `</span>`
+    names[i] = `<span class="name">` + names[i].slice(0, 1).toUpperCase() + names[i].slice(1) + `</span>`
   }
   return names
 }
