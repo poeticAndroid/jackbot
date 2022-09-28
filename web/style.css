@@ -11,6 +11,14 @@ html.voting-state {
   background-size: cover;
 }
 
+body {
+  margin: 0;
+}
+
+code {
+  background-color: rgba(0, 0, 0, 50%);
+}
+
 .voting {
   position: absolute;
   top: -50vh;
@@ -69,4 +77,41 @@ html.voting-state {
 
 #debug {
   display: none;
+}
+
+#partyTicker {
+  background-color: rgba(0, 0, 0, 50%);
+  box-shadow: 0 0 1em #333;
+  color: #ccc;
+  padding: .25em;
+  text-align: center;
+}
+
+.partyTime {
+  animation-name: partyTime;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes partyTime {
+  0% {
+    background-color: #f00;
+  }
+
+  25% {
+    background-color: #ff0;
+    color: #000;
+  }
+
+  50% {
+    background-color: #0f0;
+  }
+
+  75% {
+    background-color: #00f;
+  }
+
+  100% {
+    background-color: #f00;
+  }
 }

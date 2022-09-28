@@ -30,6 +30,7 @@ function tick(_state) {
 
   updateQuitVotes(state.quitVotes, state.state === "quitting", state.quitVoteTime)
   updateGameVotes(state.gameVotes, state.state === "voting", state.gameVoteTime)
+  updatePartyTicker(state.parties)
 }
 
 function updateQuitVotes(votes, count, max) {
@@ -97,4 +98,50 @@ function updateGameVotes(votes, count, max) {
     document.querySelector("#game-voting tbody").removeChild(el)
     document.querySelector("#game-voting tbody").appendChild(el)
   }
+}
+
+function updatePartyTicker(parties = []) {
+  let now = new Date()
+  let minutesLeft = 60 - now.getMinutes()
+  let hour = now.getHours() + 1
+  if (hour > 23) hour = 0
+  let nextParty = state.parties[hour] || []
+
+  let el = document.querySelector("#partyTicker")
+  if (minutesLeft > 59) {
+    el.innerHTML = `🎉🎉🎉 It's party time! 🎉🎉🎉`
+    el.classList.add("partyTime")
+  } else if (minutesLeft < 2) {
+    el.innerHTML = `The <code>!party</code> is about to start! 😲`
+    el.classList.remove("partyTime")
+  } else if (nextParty.length > 1) {
+    el.innerHTML = `Next <code>!party</code> starts in ${minutesLeft} minutes! ${listify(nextParty)} are coming!`
+    el.classList.remove("partyTime")
+  } else if (nextParty.length) {
+    el.innerHTML = `Next <code>!party</code> starts in ${minutesLeft} minutes! ${listify(nextParty)} is coming!`
+    el.classList.remove("partyTime")
+  } else {
+    el.innerHTML = `Next <code>!party</code> starts in ${minutesLeft} minutes! Are you coming?`
+    el.classList.remove("partyTime")
+  }
+}
+
+function atfy(names) {
+  for (let i = 0; i < names.length; i++) {
+    names[i] = "@" + names[i]
+  }
+  return names
+}
+
+function listify(list) {
+  if (!list.length) return ""
+  if (list.length === 1) return list[0]
+  list = JSON.parse(JSON.stringify(list))
+  let str = list.pop()
+  let glue = " and "
+  while (list.length) {
+    str = list.pop() + glue + str
+    glue = ", "
+  }
+  return str
 }
