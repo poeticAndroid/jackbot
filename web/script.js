@@ -1,5 +1,8 @@
 let state
 let hands = ["✊", "👍", "🤘", "🤟", "✋", "🖐", "🖖", "👏", "🙏", "🙌"]
+let giphyKey = "I7yGdZNsyPKmrAIfougyqHo1BazGilF8"
+let partyGifs = []
+refillGifs()
 
 setInterval(() => {
   fetch("./state.json").then(resp => {
@@ -19,12 +22,15 @@ setInterval(() => {
     }, 4096)
   })
 }, 1000)
+setInterval(updatePartyGuest, 8192)
+addEventListener("click", e => document.querySelector("audio").play())
 
 function tick(_state) {
   document.querySelector("#debug").textContent = JSON.stringify(_state, null, 2)
   if (state && (_state.state !== state.state)) {
     document.querySelector("html").classList.remove(state.state + "-state")
   }
+  while (state?.partyGuests.length) _state.partyGuests.push(state.partyGuests.pop())
   state = _state
   document.querySelector("html").classList.add(state.state + "-state")
 
@@ -126,6 +132,33 @@ function updatePartyTicker(parties = []) {
   } else {
     el.innerHTML = `The next <code>!party</code> starts in ${minutesLeft} minutes! Are you coming?`
   }
+}
+function updatePartyGuest() {
+  let el = document.querySelector(".partyGuest")
+  if (state.partyGuests.length) {
+    let name = state.partyGuests.pop()
+    el.querySelector(".name").textContent = name
+    if (partyGifs.length) el.querySelector("img").src = partyGifs.pop()
+    if (!partyGifs.length) refillGifs()
+    el.classList.add("new")
+    document.querySelector("audio").play()
+  }
+  setTimeout(() => {
+    el.classList.remove("new")
+  }, 8000)
+}
+
+function refillGifs() {
+  fetch("https://api.giphy.com/v1/gifs/search?q=party&api_key=" + giphyKey).then(resp => {
+    if (resp.status !== 200) {
+      return
+    }
+    resp.json().then(respJson => {
+      while (respJson?.data?.length) {
+        partyGifs.splice(Math.floor(Math.random() * partyGifs.length), 0, respJson.data.pop().images.downsized_medium.url)
+      }
+    })
+  })
 }
 
 function markupNames(names) {
