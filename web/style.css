@@ -93,6 +93,10 @@ code {
   animation-iteration-count: infinite;
 }
 
+.name {
+  color: white;
+}
+
 @keyframes partyTime {
   0% {
     background-color: #f00;

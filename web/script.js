@@ -105,7 +105,7 @@ function updatePartyTicker(parties = []) {
   let minutesLeft = 60 - now.getMinutes()
   let hour = now.getHours() + 1
   if (hour > 23) hour = 0
-  let nextParty = state.parties[hour] || []
+  let nextParty = markupNames(state.parties[hour] || [])
 
   let el = document.querySelector("#partyTicker")
   if (minutesLeft > 59) {
@@ -126,9 +126,9 @@ function updatePartyTicker(parties = []) {
   }
 }
 
-function atfy(names) {
+function markupNames(names) {
   for (let i = 0; i < names.length; i++) {
-    names[i] = "@" + names[i]
+    names[i] = `<span class="name">` + names[i] + `</span>`
   }
   return names
 }
