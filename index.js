@@ -36,13 +36,13 @@ client.on('message', (channel, tags, message, self) => {
   loneliness = setInterval(() => {
     lonely(channel)
   }, 1000 * 60 * 15)
-  if (!state.chatters.includes(tags.username)) {
-    state.chatters.push(tags.username)
+  if (!state.chatters.includes(tags["display-name"])) {
+    state.chatters.push(tags["display-name"])
   }
-  if (thisParty().includes(tags.username)) {
-    thisParty().splice(thisParty().indexOf(tags.username), 1)
-    state.partyGuests.push(tags.username)
-    client.say(channel, `@${tags.username} welcome to the party! So glad you could come! PartyTime`)
+  if (thisParty().includes(tags["display-name"])) {
+    thisParty().splice(thisParty().indexOf(tags["display-name"]), 1)
+    state.partyGuests.push(tags["display-name"])
+    client.say(channel, `@${tags["display-name"]} welcome to the party! So glad you could come! PartyTime`)
   }
   if (self) return
   if (message.slice(0, 1) === '!') {
@@ -53,21 +53,21 @@ client.on('message', (channel, tags, message, self) => {
     }
     switch (cmd[0]) {
       case "!hello":
-        client.say(channel, `@${tags.username} greetings! HeyGuys`)
+        client.say(channel, `@${tags["display-name"]} greetings! HeyGuys`)
         break
 
       case "!secret":
-        client.say(channel, `@${tags.username} congratulations! You found the secret command! Use it responsibly PowerUpL MingLee PowerUpR`)
+        client.say(channel, `@${tags["display-name"]} congratulations! You found the secret command! Use it responsibly PowerUpL MingLee PowerUpR`)
         break
 
       case "!help":
       case "!commands":
         let now = new Date()
-        let minutes = 60 - now.getMinutes()
+        let minutesLeft = 60 - now.getMinutes()
         client.say(channel, `!list - List all available games.`)
         client.say(channel, `!vote <game title> - Vote on a Jackbox game to play.`)
         client.say(channel, `!exit/!restart/!stay - vote for ending/restarting/keep playing the current game.`)
-        client.say(channel, `!party - Promise to be back here in ${minutes} minutes for the next party!`)
+        client.say(channel, `!party - Promise to be back here in ${minutesLeft} minutes for the next party!`)
         client.say(channel, `!src - Link to source on Github.`)
         break
 
@@ -123,7 +123,7 @@ function listGames(channel, tags, message, self) {
 function voteGame(channel, tags, message, self) {
   let cmd = message.trim().toLowerCase().split(/\s+/)
   if (!cmd[1]) {
-    client.say(channel, `@${tags.username} forgot to give a title! Type '!vote' followed by the game title.. (or just some of it) BibleThump`)
+    client.say(channel, `@${tags["display-name"]} forgot to give a title! Type '!vote' followed by the game title.. (or just some of it) BibleThump`)
     return
   }
   if (state.state === "idle") {
@@ -132,28 +132,28 @@ function voteGame(channel, tags, message, self) {
   let gameId = resolveGame(cmd.slice(1))
   let game = games[gameId]
   if (game) {
-    let same = state.gameVoters[tags.username] === gameId
+    let same = state.gameVoters[tags["display-name"]] === gameId
     let change, alreadyPlaying
-    if (state.gameVoters[tags.username]) {
-      state.gameVotes[state.gameVoters[tags.username]]--
+    if (state.gameVoters[tags["display-name"]]) {
+      state.gameVotes[state.gameVoters[tags["display-name"]]]--
       change = true
     }
     if (state.state === "playing" && state.currentGame === gameId) {
       alreadyPlaying = true
     } else {
-      state.gameVoters[tags.username] = gameId
-      state.gameVotes[state.gameVoters[tags.username]] = state.gameVotes[state.gameVoters[tags.username]] || 0
-      state.gameVotes[state.gameVoters[tags.username]]++
+      state.gameVoters[tags["display-name"]] = gameId
+      state.gameVotes[state.gameVoters[tags["display-name"]]] = state.gameVotes[state.gameVoters[tags["display-name"]]] || 0
+      state.gameVotes[state.gameVoters[tags["display-name"]]]++
       state.gameVoteTime = 10
     }
     if (alreadyPlaying) {
-      client.say(channel, `@${tags.username} we're already playing ${game.title}! Did you mean to '!restart' it?`)
+      client.say(channel, `@${tags["display-name"]} we're already playing ${game.title}! Did you mean to '!restart' it?`)
     } else if (same) {
-      client.say(channel, `@${tags.username} dont worry. I haven't forgotten your vote for ${game.title}! SeemsGood`)
+      client.say(channel, `@${tags["display-name"]} dont worry. I haven't forgotten your vote for ${game.title}! SeemsGood`)
     } else if (change) {
-      client.say(channel, `@${tags.username} changed their mind and would rather play ${game.title} instead. SeemsGood`)
+      client.say(channel, `@${tags["display-name"]} changed their mind and would rather play ${game.title} instead. SeemsGood`)
     } else {
-      client.say(channel, `@${tags.username} wants to play ${game.title}! SeemsGood`)
+      client.say(channel, `@${tags["display-name"]} wants to play ${game.title}! SeemsGood`)
     }
     if (state.state === "playing" && !exitReminder) {
       client.say(channel, `We're currently playing ${games[state.currentGame].title}. Type '!exit' to vote for ending this game.`)
@@ -162,7 +162,7 @@ function voteGame(channel, tags, message, self) {
       }, 1024 * 64)
     }
   } else {
-    client.say(channel, `@${tags.username} I don't know the game ${cmd.slice(1).join(" ")}! BibleThump`)
+    client.say(channel, `@${tags["display-name"]} I don't know the game ${cmd.slice(1).join(" ")}! BibleThump`)
   }
 }
 
@@ -171,24 +171,24 @@ function voteRestart(channel, tags, message, self) {
     startQuitting(channel)
   }
   if (state.state !== "quitting") {
-    client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
+    client.say(channel, `@${tags["display-name"]} type '!vote <game name>' if you want to play something.. BibleThump`)
     return
   }
-  let same = state.quitVoters[tags.username] === "restart"
+  let same = state.quitVoters[tags["display-name"]] === "restart"
   let change = false
-  if (state.quitVoters[tags.username]) {
-    state.quitVotes[state.quitVoters[tags.username]]--
+  if (state.quitVoters[tags["display-name"]]) {
+    state.quitVotes[state.quitVoters[tags["display-name"]]]--
     change = true
   }
-  state.quitVoters[tags.username] = "restart"
-  state.quitVotes[state.quitVoters[tags.username]] = state.quitVotes[state.quitVoters[tags.username]] || 0
-  state.quitVotes[state.quitVoters[tags.username]]++
+  state.quitVoters[tags["display-name"]] = "restart"
+  state.quitVotes[state.quitVoters[tags["display-name"]]] = state.quitVotes[state.quitVoters[tags["display-name"]]] || 0
+  state.quitVotes[state.quitVoters[tags["display-name"]]]++
   if (same) {
-    client.say(channel, `@${tags.username} can't wait to start over! SeemsGood`)
+    client.say(channel, `@${tags["display-name"]} can't wait to start over! SeemsGood`)
   } else if (change) {
-    client.say(channel, `@${tags.username} changed their mind and wants to restart ${games[state.currentGame].title} instead.. SeemsGood`)
+    client.say(channel, `@${tags["display-name"]} changed their mind and wants to restart ${games[state.currentGame].title} instead.. SeemsGood`)
   } else {
-    client.say(channel, `@${tags.username} wants to restart ${games[state.currentGame].title}.. SeemsGood`)
+    client.say(channel, `@${tags["display-name"]} wants to restart ${games[state.currentGame].title}.. SeemsGood`)
   }
 }
 
@@ -197,24 +197,24 @@ function voteExit(channel, tags, message, self) {
     startQuitting(channel)
   }
   if (state.state !== "quitting") {
-    client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
+    client.say(channel, `@${tags["display-name"]} type '!vote <game name>' if you want to play something.. BibleThump`)
     return
   }
-  let same = state.quitVoters[tags.username] === "quit"
+  let same = state.quitVoters[tags["display-name"]] === "quit"
   let change = false
-  if (state.quitVoters[tags.username]) {
-    state.quitVotes[state.quitVoters[tags.username]]--
+  if (state.quitVoters[tags["display-name"]]) {
+    state.quitVotes[state.quitVoters[tags["display-name"]]]--
     change = true
   }
-  state.quitVoters[tags.username] = "quit"
-  state.quitVotes[state.quitVoters[tags.username]] = state.quitVotes[state.quitVoters[tags.username]] || 0
-  state.quitVotes[state.quitVoters[tags.username]]++
+  state.quitVoters[tags["display-name"]] = "quit"
+  state.quitVotes[state.quitVoters[tags["display-name"]]] = state.quitVotes[state.quitVoters[tags["display-name"]]] || 0
+  state.quitVotes[state.quitVoters[tags["display-name"]]]++
   if (same) {
-    client.say(channel, `@${tags.username} is so impatient! SeemsGood`)
+    client.say(channel, `@${tags["display-name"]} is so impatient! SeemsGood`)
   } else if (change) {
-    client.say(channel, `@${tags.username} changed their mind and dont't want to play ${games[state.currentGame].title} after all.. SeemsGood`)
+    client.say(channel, `@${tags["display-name"]} changed their mind and dont't want to play ${games[state.currentGame].title} after all.. SeemsGood`)
   } else {
-    client.say(channel, `@${tags.username} don't want to play ${games[state.currentGame].title} anymore.. SeemsGood`)
+    client.say(channel, `@${tags["display-name"]} don't want to play ${games[state.currentGame].title} anymore.. SeemsGood`)
   }
 }
 
@@ -223,24 +223,24 @@ function voteStay(channel, tags, message, self) {
     startQuitting(channel)
   }
   if (state.state !== "quitting") {
-    client.say(channel, `@${tags.username} type '!vote <game name>' if you want to play something.. BibleThump`)
+    client.say(channel, `@${tags["display-name"]} type '!vote <game name>' if you want to play something.. BibleThump`)
     return
   }
-  let same = state.quitVoters[tags.username] === "continue"
+  let same = state.quitVoters[tags["display-name"]] === "continue"
   let change = false
-  if (state.quitVoters[tags.username]) {
-    state.quitVotes[state.quitVoters[tags.username]]--
+  if (state.quitVoters[tags["display-name"]]) {
+    state.quitVotes[state.quitVoters[tags["display-name"]]]--
     change = true
   }
-  state.quitVoters[tags.username] = "continue"
-  state.quitVotes[state.quitVoters[tags.username]] = state.quitVotes[state.quitVoters[tags.username]] || 0
-  state.quitVotes[state.quitVoters[tags.username]]++
+  state.quitVoters[tags["display-name"]] = "continue"
+  state.quitVotes[state.quitVoters[tags["display-name"]]] = state.quitVotes[state.quitVoters[tags["display-name"]]] || 0
+  state.quitVotes[state.quitVoters[tags["display-name"]]]++
   if (same) {
-    client.say(channel, `@${tags.username} really likes this game! SeemsGood`)
+    client.say(channel, `@${tags["display-name"]} really likes this game! SeemsGood`)
   } else if (change) {
-    client.say(channel, `@${tags.username} changed their mind and wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
+    client.say(channel, `@${tags["display-name"]} changed their mind and wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
   } else {
-    client.say(channel, `@${tags.username} wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
+    client.say(channel, `@${tags["display-name"]} wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
   }
 }
 
@@ -248,14 +248,15 @@ function joinParty(channel, tags, message, self) {
   let party = nextParty()
   let now = new Date()
   let minutes = 60 - now.getMinutes()
-  let i = party.indexOf(tags.username)
+  let i = party.indexOf(tags['display-name'])
   if (now.getMinutes() < 1) {
-    client.say(channel, `@${tags.username} Welcome to the party! PartyTime`)
+    client.say(channel, `@${tags["display-name"]} Welcome to the party! PartyTime`)
   } else if (i < 0) {
-    client.say(channel, `@${tags.username} you're coming to the party? That's great! We'll see you back here in ${minutes} minutes! Bring snacks and drinks! PartyTime`)
-    party.push(tags.username)
+    client.say(channel, `@${tags["display-name"]} you're coming to the party? That's great! We'll see you back here in ${minutes} minutes! Bring snacks and drinks! PartyTime`)
+    party.push(tags['display-name'])
   } else {
-    client.say(channel, `@${tags.username} excited for the party? That's great! We'll see you back here in ${minutes} minutes! Bring snacks and drinks! PartyTime`)
+    client.say(channel, `@${tags["display-name"]} oh... You're not coming to the party after all..? BibleThump`)
+    party.splice(i, 1)
   }
   fs.writeFileSync("./parties.json", JSON.stringify(state.parties, null, 2))
 }
