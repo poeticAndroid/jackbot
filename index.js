@@ -30,7 +30,12 @@ let loneliness, exitReminder
 
 client.connect().catch(console.error)
 client.on('message', (channel, tags, message, self) => {
-  lastParty().length = 0
+  if (lastParty().length) {
+    lastParty().length = 0
+    setTimeout(() => {
+      fs.writeFileSync("./parties.json", JSON.stringify(state.parties, null, 2))
+    }, 600 * 1000)
+  }
   state.idleSince = Date.now()
   clearTimeout(loneliness)
   loneliness = setInterval(() => {
@@ -254,11 +259,11 @@ function joinParty(channel, tags, message, self) {
   } else if (i < 0) {
     client.say(channel, `@${tags["display-name"]} you're coming to the party? That's great! We'll see you back here in ${minutes} minutes! Bring snacks and drinks! PartyTime`)
     party.push(tags['display-name'])
+    fs.writeFileSync("./parties.json", JSON.stringify(state.parties, null, 2))
   } else {
     client.say(channel, `@${tags["display-name"]} oh... You're not coming to the party after all..? oh well... BibleThump`)
     party.splice(i, 1)
   }
-  fs.writeFileSync("./parties.json", JSON.stringify(state.parties, null, 2))
 }
 
 function startQuitting(channel) {
