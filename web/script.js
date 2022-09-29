@@ -23,7 +23,10 @@ setInterval(() => {
   })
 }, 1000)
 setInterval(updatePartyGuest, 8192)
-addEventListener("click", e => document.querySelector("audio").play())
+addEventListener("click", e => {
+  document.querySelector("#partySnd").play()
+  document.querySelector("#guestSnd").play()
+})
 
 function tick(_state) {
   document.querySelector("#debug").textContent = JSON.stringify(_state, null, 2)
@@ -117,6 +120,7 @@ function updatePartyTicker(parties = []) {
 
   let el = document.querySelector("#partyTicker")
   if (minutesLeft > 59) {
+    document.querySelector("#partySnd").play()
     el.classList.add("partyTime")
   } else {
     el.classList.remove("partyTime")
@@ -141,7 +145,7 @@ function updatePartyGuest() {
     if (partyGifs.length) el.querySelector("img").src = partyGifs.pop()
     if (!partyGifs.length) refillGifs()
     el.classList.add("new")
-    document.querySelector("audio").play()
+    document.querySelector("#guestSnd").play()
   }
   setTimeout(() => {
     el.classList.remove("new")
