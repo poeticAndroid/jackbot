@@ -30,8 +30,8 @@ let loneliness, exitReminder
 
 client.connect().catch(console.error)
 client.on('message', (channel, tags, message, self) => {
-  if (lastParty().length) {
-    lastParty().length = 0
+  if (nextParty(2).length) {
+    nextParty(2).length = 0
     setTimeout(() => {
       fs.writeFileSync("./parties.json", JSON.stringify(state.parties, null, 2))
     }, 600 * 1000)
@@ -382,17 +382,10 @@ function resolveGame(words) {
   return bestGame.id
 }
 
-function lastParty() {
+function nextParty(plus = 1) {
   let now = new Date()
-  let hour = now.getHours() - 1
-  if (hour < 0) hour = 23
-  state.parties[hour] = state.parties[hour] || []
-  return state.parties[hour]
-}
-function nextParty() {
-  let now = new Date()
-  let hour = now.getHours() + 1
-  if (hour > 23) hour = 0
+  let hour = now.getHours() + plus
+  if (hour > 23) hour -= 24
   state.parties[hour] = state.parties[hour] || []
   return state.parties[hour]
 }
