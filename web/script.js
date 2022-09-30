@@ -126,15 +126,15 @@ function updatePartyTicker(parties = []) {
     el.classList.remove("partyTime")
   }
   if (minutesLeft > 59) {
-    el.innerHTML = ` 🎉 🎉 🎉 It's <code>!party</code> time! 🎉 🎉 🎉 `
+    el.innerHTML = ` 🎉 🎉 🎉 It's party time! 🎉 🎉 🎉 `
   } else if (minutesLeft < 2) {
-    el.innerHTML = `The <code>!party</code> is about to start! 😲`
+    el.innerHTML = `The party is about to start! 😲`
   } else if (minutesLeft > 50 && thisParty.length) {
-    el.innerHTML = `The <code>!party</code> has begun! Waiting for ${listify(thisParty)} to arrive...`
+    el.innerHTML = `The party has begun! Waiting for ${listify(thisParty)} to arrive...`
   } else if (nextParty.length) {
-    el.innerHTML = `The next <code>!party</code> starts in ${minutesLeft} minutes! ${listify(nextParty)} will be here!`
+    el.innerHTML = `The next party starts in ${minutesLeft} minutes! ${listify(nextParty)} will be here! Type <code>!party</code> if you're coming too!`
   } else {
-    el.innerHTML = `The next <code>!party</code> starts in ${minutesLeft} minutes! Are you coming?`
+    el.innerHTML = `The next party starts in ${minutesLeft} minutes! Type <code>!party</code> if you're coming!`
   }
 }
 function updatePartyGuest() {
