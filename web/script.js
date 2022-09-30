@@ -120,7 +120,8 @@ function updatePartyTicker(parties = []) {
 
   let el = document.querySelector("#partyTicker")
   if (minutesLeft > 59) {
-    document.querySelector("#partySnd").play()
+    if (!el.classList.contains("partyTime"))
+      document.querySelector("#partySnd").play()
     el.classList.add("partyTime")
   } else {
     el.classList.remove("partyTime")
