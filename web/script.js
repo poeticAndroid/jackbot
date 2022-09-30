@@ -130,11 +130,11 @@ function updatePartyTicker(parties = []) {
   } else if (minutesLeft < 2) {
     el.innerHTML = `The party is about to start! 😲`
   } else if (minutesLeft > 50 && thisParty.length) {
-    el.innerHTML = `The party has begun! Waiting for ${listify(thisParty)} to arrive...`
+    el.innerHTML = `The party has begun! Waiting for ${listify(thisParty)} to type something in chat...`
   } else if (nextParty.length) {
     el.innerHTML = `The next party starts in ${minutesLeft} minutes! ${listify(nextParty)} will be here! Type <code>!party</code> if you're coming too!`
   } else {
-    el.innerHTML = `The next party starts in ${minutesLeft} minutes! Type <code>!party</code> if you're coming!`
+    el.innerHTML = `The next party starts in ${minutesLeft} minutes! Type <code>!party</code> if you plan on coming!`
   }
 }
 function updatePartyGuest() {
