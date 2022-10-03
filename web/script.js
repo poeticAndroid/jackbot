@@ -131,7 +131,7 @@ function updatePartyTicker(parties = []) {
   } else if (minutesLeft < 2) {
     el.innerHTML = `The party is about to start! 😲`
   } else if (minutesLeft > 50 && thisParty.length) {
-    el.innerHTML = `The party has begun! Waiting for ${listify(thisParty)} to type something in chat...`
+    el.innerHTML = `The party has begun! Waiting for ${listify(thisParty)} to appear in chat...`
   } else if (nextParty.length) {
     el.innerHTML = `The next party starts in ${minutesLeft} minutes! ${listify(nextParty)} will be here! Type <code>!party</code> if you're coming too!`
   } else {
@@ -168,7 +168,7 @@ function refillGifs() {
 
 function markupNames(names) {
   for (let i = 0; i < names.length; i++) {
-    names[i] = `<span class="name">` + names[i].slice(0, 1).toUpperCase() + names[i].slice(1) + `</span>`
+    names[i] = `<span class="name">` + names[i] + `</span>`
   }
   return names
 }

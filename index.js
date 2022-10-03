@@ -255,7 +255,7 @@ function joinParty(channel, tags, message, self) {
   let minutes = 60 - now.getMinutes()
   let i = party.indexOf(tags['display-name'])
   if (now.getMinutes() < 1) {
-    client.say(channel, `@${tags["display-name"]} Welcome to the party! PartyTime`)
+    client.say(channel, `@${tags["display-name"]} The party just started! Stay a while! PartyTime`)
   } else if (i < 0) {
     client.say(channel, `@${tags["display-name"]} you're coming to the party? That's great! We'll see you back here in ${minutes} minutes! Bring snacks and drinks! PartyTime`)
     party.push(tags['display-name'])
