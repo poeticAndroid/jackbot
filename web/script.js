@@ -110,6 +110,7 @@ function updateGameVotes(votes, count, max) {
 }
 
 function updatePartyTicker(parties = []) {
+  return
   let now = new Date()
   let minutesLeft = 60 - now.getMinutes()
   let hour = now.getHours()
@@ -143,14 +144,14 @@ function updatePartyGuest() {
   if (state.partyGuests.length) {
     let name = state.partyGuests.pop()
     el.querySelector(".name").textContent = name
-    if (partyGifs.length) el.querySelector("img").src = partyGifs.pop()
-    if (!partyGifs.length) refillGifs()
     el.classList.add("new")
     document.querySelector("#guestSnd").play()
+    setTimeout(() => {
+      el.classList.remove("new")
+      if (partyGifs.length) el.querySelector("img").src = partyGifs.pop()
+      if (!partyGifs.length) refillGifs()
+    }, 8000)
   }
-  setTimeout(() => {
-    el.classList.remove("new")
-  }, 8000)
 }
 
 function refillGifs() {

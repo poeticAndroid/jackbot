@@ -80,6 +80,7 @@ code {
 }
 
 #partyTicker {
+  display: none;
   background-color: rgba(0, 0, 0, 50%);
   box-shadow: 0 0 1em #333;
   color: #ccc;
