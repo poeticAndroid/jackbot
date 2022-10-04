@@ -110,7 +110,6 @@ function updateGameVotes(votes, count, max) {
 }
 
 function updatePartyTicker(parties = []) {
-  return
   let now = new Date()
   let minutesLeft = 60 - now.getMinutes()
   let hour = now.getHours()
