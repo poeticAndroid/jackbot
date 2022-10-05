@@ -123,7 +123,9 @@ function listGames(channel, tags, message, self) {
   }
   titles.sort()
   client.say(channel, "Available games (and players required): " + titles.join(", "))
-  client.say(channel, "Read more about the games at https://www.jackboxgames.com/games/#:~:text=Games%20in%20Party%20Packs")
+  setTimeout(() => {
+    client.say(channel, "Read more about the games at https://www.jackboxgames.com/games/#:~:text=Games%20in%20Party%20Packs")
+  }, 1024)
 }
 
 function voteGame(channel, tags, message, self) {
