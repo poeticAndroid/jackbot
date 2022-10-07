@@ -25,7 +25,6 @@ setInterval(() => {
 setInterval(updatePartyGuest, 8192)
 addEventListener("click", e => {
   document.querySelector("#partySnd").play()
-  document.querySelector("#guestSnd").play()
 })
 
 function tick(_state) {
@@ -40,6 +39,15 @@ function tick(_state) {
   updateQuitVotes(state.quitVotes, state.state === "quitting", state.quitVoteTime)
   updateGameVotes(state.gameVotes, state.state === "voting", state.gameVoteTime)
   updatePartyTicker(state.parties)
+
+  if (state.state === "voting") {
+    document.querySelector("#radioSnd").play()
+    if (document.querySelector("#radioSnd").volume < 0.5)
+      document.querySelector("#radioSnd").volume += 0.0625
+  } else {
+    if (document.querySelector("#radioSnd").volume > 0)
+      document.querySelector("#radioSnd").volume -= 0.0625
+  }
 }
 
 function updateQuitVotes(votes, count, max) {
