@@ -171,7 +171,7 @@ function updatePartyGuest() {
 }
 
 function refillGifs() {
-  fetch("https://api.giphy.com/v1/gifs/search?q=party&api_key=" + giphyKey).then(resp => {
+  fetch("./giphy.json?q=party&api_key=" + giphyKey).then(resp => {
     if (resp.status !== 200) {
       return
     }
