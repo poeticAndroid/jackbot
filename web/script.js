@@ -44,7 +44,7 @@ function tick(_state) {
   if (state.state === "quitting") {
     if (radio.src.includes("null:")) {
       radio.src = radio.src.replace("null:", "")
-      // radio.play()
+      radio.play()
     }
   } else if (state.state === "voting") {
     if (radio.volume < 0.5) {
