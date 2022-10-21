@@ -1,18 +1,19 @@
-#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#NoEnv ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+SendMode Input ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 
 CoordMode, Mouse, Client
 
 global packs := [ "steam://rungameid/331670"
-  ,"steam://rungameid/397460"
-  ,"steam://rungameid/434170"
-  ,"steam://rungameid/610180"
-  ,"steam://rungameid/774461"
-  ,"steam://rungameid/1005300"
-  ,"steam://rungameid/1211630"
-  ,"steam://rungameid/1552350" ]
+,"steam://rungameid/397460"
+,"steam://rungameid/434170"
+,"steam://rungameid/610180"
+,"steam://rungameid/774461"
+,"steam://rungameid/1005300"
+,"steam://rungameid/1211630"
+,"steam://rungameid/1552350" 
+,"steam://rungameid/1850960" ]
 
 cmd := A_Args[1]
 pack := A_Args[2]
@@ -83,7 +84,6 @@ StartGame(pack, game) {
     Sleep, 10000
   }
 }
-
 
 Escape() {
   WinActivate, The Jackbox Party Pack

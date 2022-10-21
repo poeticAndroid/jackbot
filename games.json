@@ -280,5 +280,40 @@
     "playersMin": 1,
     "playersMax": 6,
     "lowLatency": true
+  },
+  "fib4": {
+    "title": "Fibbage 4",
+    "pack": 9,
+    "game": 1,
+    "playersMin": 2,
+    "playersMax": 8
+  },
+  "room": {
+    "title": "Roomerang",
+    "pack": 9,
+    "game": 2,
+    "playersMin": 4,
+    "playersMax": 9
+  },
+  "junk": {
+    "title": "Junktopia",
+    "pack": 9,
+    "game": 3,
+    "playersMin": 3,
+    "playersMax": 8
+  },
+  "nons": {
+    "title": "Nonsensory",
+    "pack": 9,
+    "game": 4,
+    "playersMin": 3,
+    "playersMax": 8
+  },
+  "quix": {
+    "title": "Quixort",
+    "pack": 9,
+    "game": 5,
+    "playersMin": 1,
+    "playersMax": 10
   }
 }
