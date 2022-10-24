@@ -26,7 +26,7 @@ const state = {
   partyGuests: []
 }
 const client = new tmi.Client(config)
-let loneliness, exitReminder
+let loneliness, exitReminder, chilled
 
 client.connect().catch(console.error)
 client.on('message', (channel, tags, message, self) => {
@@ -63,6 +63,11 @@ client.on('message', (channel, tags, message, self) => {
 
       case "!secret":
         client.say(channel, `@${tags["display-name"]} congratulations! You found the secret command! Use it responsibly PowerUpL MingLee PowerUpR`)
+        break
+
+      case "!chill":
+        if (!chilled) client.say(channel, `/raid relaxbeats`)
+        chilled = true
         break
 
       case "!help":
