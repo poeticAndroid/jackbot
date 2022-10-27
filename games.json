@@ -313,7 +313,7 @@
     "title": "Quixort",
     "pack": 9,
     "game": 5,
-    "playersMin": 1,
+    "playersMin": 2,
     "playersMax": 10
   }
 }
