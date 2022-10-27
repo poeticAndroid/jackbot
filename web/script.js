@@ -66,8 +66,6 @@ function tick(_state) {
   } else {
     if (radio.volume > 0) {
       radio.volume -= 0.0625
-    } else {
-      radio.pause()
     }
   }
 }
