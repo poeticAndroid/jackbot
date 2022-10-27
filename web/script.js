@@ -59,11 +59,11 @@ function tick(_state) {
       radio.src = music.shift()
     } else {
       radio.play()
+      if (radio.volume < 0.5) {
+        radio.volume += 0.0625
+      }
     }
-    if (radio.volume < 0.5) {
-      radio.volume += 0.0625
-    }
-  } else if (state.state === "playing") {
+  } else {
     if (radio.volume > 0) {
       radio.volume -= 0.0625
     } else {
