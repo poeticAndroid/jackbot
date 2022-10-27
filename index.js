@@ -65,8 +65,10 @@ client.on('message', (channel, tags, message, self) => {
         client.say(channel, `@${tags["display-name"]} congratulations! You found the secret command! Use it responsibly PowerUpL MingLee PowerUpR`)
         break
 
-      case "!chill":
-        if (!chilled) client.say(channel, `/raid relaxbeats`)
+      case "!streamers":
+        if (!chilled) getStreamers().then(streamers => {
+          client.say(channel, streamers.join(", "))
+        })
         chilled = true
         break
 
@@ -404,12 +406,52 @@ function thisParty() {
   return state.parties[hour]
 }
 
+async function getStreamers(game = "Jackbox Party Packs") {
+  let url = `https://m.twitch.tv/directory/game/${encodeURI(game)}`
+  // let res = await fetch(url)
+  let html = await httpsGet(url)
+  let names = []
+  let all = []
+  let i = html.indexOf("tw-link")
+  do {
+    let name = html.slice(html.indexOf(">", i) + 1, html.indexOf("<", i))
+    if (all.includes(name)) {
+      if (names.includes(name)) names.splice(names.indexOf(name), 1)
+    } else {
+      all.push(name)
+      names.push(name)
+    }
+    i = html.indexOf(" tw-link\"", i + 1)
+  } while (i > 0)
+  return names
+}
+
+function httpsGet(url) {
+  return new Promise((resolve, reject) => {
+    const https = require('node:https')
+
+    https.get(url, (res) => {
+      let data = ""
+      res.on('data', (d) => {
+        data += d
+      })
+      res.on('close', (d) => {
+        resolve(data)
+      })
+
+    }).on('error', (e) => {
+      reject(e)
+    })
+  })
+}
+
 
 /// web server ///
 
 const http = require("http"),
   fs = require("fs"),
   path = require("path")
+const { rejects } = require("assert")
 
 const hostname = "127.0.0.1"
 const port = 3000
