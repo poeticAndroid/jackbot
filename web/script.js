@@ -1,5 +1,17 @@
 let state
 let hands = ["✊", "👍", "🤘", "🤟", "✋", "🖐", "🖖", "👏", "🙏", "🙌"]
+let music = [
+  "./music/AuditoryCheesecake_DressForIt.mp3",
+  "./music/AuditoryCheesecake_Fresh.mp3",
+  "./music/AuditoryCheesecake_Greystone.mp3",
+  "./music/AuditoryCheesecake_Mathias.mp3",
+  "./music/AuditoryCheesecake_Paradox.mp3",
+  "./music/AuditoryCheesecake_Rotary.mp3",
+  "./music/AuditoryCheesecake_Salida.mp3",
+  "./music/AuditoryCheesecake_Twentyone.mp3",
+  "./music/AuditoryCheesecake_Vines.mp3",
+]
+document.querySelector("#radioSnd").src = music.shift()
 let giphyKey = "I7yGdZNsyPKmrAIfougyqHo1BazGilF8"
 let partyGifs = []
 refillGifs()
@@ -41,12 +53,13 @@ function tick(_state) {
   updatePartyTicker(state.parties)
 
   let radio = document.querySelector("#radioSnd")
-  if (state.state === "quitting") {
-    if (radio.src.includes("null:")) {
-      radio.src = radio.src.replace("null:", "")
+  if (state.state === "voting") {
+    if (radio.ended) {
+      music.push(radio.src)
+      radio.src = music.shift()
+    } else {
       radio.play()
     }
-  } else if (state.state === "voting") {
     if (radio.volume < 0.5) {
       radio.volume += 0.0625
     }
@@ -54,7 +67,7 @@ function tick(_state) {
     if (radio.volume > 0) {
       radio.volume -= 0.0625
     } else {
-      if (!radio.src.includes("null:")) radio.src = "null:" + radio.src
+      radio.pause()
     }
   }
 }
