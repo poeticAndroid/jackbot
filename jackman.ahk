@@ -44,7 +44,9 @@ RestartGame() {
   }
   Escape()
   Sleep, 512
-  Down()
+  Up()
+  Up()
+  Up()
   Sleep, 1024
   Enter()
   Loop, 3 {
@@ -95,6 +97,12 @@ Left() {
   WinActivate, The Jackbox Party Pack
   If (WinActive("The Jackbox Party Pack")) {
     Send, {Left}
+  }
+}
+Up() {
+  WinActivate, The Jackbox Party Pack
+  If (WinActive("The Jackbox Party Pack")) {
+    Send, {Up}
   }
 }
 Down() {
