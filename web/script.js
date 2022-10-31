@@ -73,11 +73,11 @@ function tick(_state) {
 }
 
 function updateQuitVotes(votes, count, max) {
+  document.querySelector("#quit-voting meter").max = max
   if (count) {
     document.querySelector("#quit-voting meter").value++
   } else {
     document.querySelector("#quit-voting meter").value = 0
-    document.querySelector("#quit-voting meter").max = max
     return
   }
   let highest = -1
@@ -90,7 +90,7 @@ function updateQuitVotes(votes, count, max) {
       document.querySelector("#quit-voting tbody").appendChild(el)
     }
     el.dataset.count = votes[opt] || 0
-    el.querySelector(".count").textContent = (parseFloat(el.dataset.count) ? hands[parseInt(el.dataset.count)] : "") + el.dataset.count
+    el.querySelector(".count").textContent = (parseFloat(el.dataset.count) ? hands[Math.min(hands.length - 1, parseInt(el.dataset.count))] : "") + el.dataset.count
     if (highest < parseFloat(el.dataset.count)) highest = parseFloat(el.dataset.count)
   }
   if (highest === 0) {
@@ -107,11 +107,11 @@ function updateQuitVotes(votes, count, max) {
   }
 }
 function updateGameVotes(votes, count, max) {
+  document.querySelector("#game-voting meter").max = max
   if (count) {
     document.querySelector("#game-voting meter").value++
   } else {
     document.querySelector("#game-voting meter").value = 0
-    document.querySelector("#game-voting meter").max = max
     document.querySelector("#game-voting tbody").innerHTML = ""
     // return
   }
@@ -125,7 +125,7 @@ function updateGameVotes(votes, count, max) {
       document.querySelector("#game-voting tbody").appendChild(el)
     }
     el.dataset.count = votes[game] || 0
-    el.querySelector(".count").textContent = (parseFloat(el.dataset.count) ? hands[parseInt(el.dataset.count)] : "") + el.dataset.count
+    el.querySelector(".count").textContent = (parseFloat(el.dataset.count) ? hands[Math.min(hands.length - 1, parseInt(el.dataset.count))] : "") + el.dataset.count
     if (highest < parseFloat(el.dataset.count)) highest = parseFloat(el.dataset.count)
   }
   if (highest === 0) highest--

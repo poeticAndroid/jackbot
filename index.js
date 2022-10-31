@@ -27,6 +27,7 @@ const state = {
 }
 const client = new tmi.Client(config)
 let loneliness, exitReminder, chilled
+let voteTO
 
 client.connect().catch(console.error)
 client.on('message', (channel, tags, message, self) => {
@@ -136,6 +137,7 @@ function listGames(channel, tags, message, self) {
 }
 
 function voteGame(channel, tags, message, self) {
+  let weight = 1
   let cmd = message.trim().toLowerCase().split(/\s+/)
   if (!cmd[1]) {
     client.say(channel, `@${tags["display-name"]} forgot to give a title! Type '!vote' followed by the game title.. (or just some of it) BibleThump`)
@@ -150,7 +152,7 @@ function voteGame(channel, tags, message, self) {
     let same = state.gameVoters[tags["display-name"]] === gameId
     let change, alreadyPlaying
     if (state.gameVoters[tags["display-name"]]) {
-      state.gameVotes[state.gameVoters[tags["display-name"]]]--
+      state.gameVotes[state.gameVoters[tags["display-name"]]] -= weight
       change = true
     }
     if (state.state === "playing" && state.currentGame === gameId) {
@@ -158,8 +160,8 @@ function voteGame(channel, tags, message, self) {
     } else {
       state.gameVoters[tags["display-name"]] = gameId
       state.gameVotes[state.gameVoters[tags["display-name"]]] = state.gameVotes[state.gameVoters[tags["display-name"]]] || 0
-      state.gameVotes[state.gameVoters[tags["display-name"]]]++
-      state.gameVoteTime = 10
+      state.gameVotes[state.gameVoters[tags["display-name"]]] += weight
+      if (state.state !== "voting") state.gameVoteTime = 10
     }
     if (alreadyPlaying) {
       client.say(channel, `@${tags["display-name"]} we're already playing ${game.title}! Did you mean to '!restart' it?`)
@@ -182,9 +184,12 @@ function voteGame(channel, tags, message, self) {
 }
 
 function voteRestart(channel, tags, message, self) {
-  if (state.state === "playing") {
-    startQuitting(channel)
+  let weight = 1
+  if (isMod(tags.username) && message.toLowerCase().includes(" now")) {
+    weight = 1024
+    rushQuitVote(channel)
   }
+  if (state.state === "playing") startQuitting(channel)
   if (state.state !== "quitting") {
     client.say(channel, `@${tags["display-name"]} type '!vote <game name>' if you want to play something.. BibleThump`)
     return
@@ -192,14 +197,15 @@ function voteRestart(channel, tags, message, self) {
   let same = state.quitVoters[tags["display-name"]] === "restart"
   let change = false
   if (state.quitVoters[tags["display-name"]]) {
-    state.quitVotes[state.quitVoters[tags["display-name"]]]--
+    state.quitVotes[state.quitVoters[tags["display-name"]]] -= weight
     change = true
   }
   state.quitVoters[tags["display-name"]] = "restart"
   state.quitVotes[state.quitVoters[tags["display-name"]]] = state.quitVotes[state.quitVoters[tags["display-name"]]] || 0
-  state.quitVotes[state.quitVoters[tags["display-name"]]]++
+  state.quitVotes[state.quitVoters[tags["display-name"]]] += weight
   if (same) {
-    client.say(channel, `@${tags["display-name"]} can't wait to start over! SeemsGood`)
+    if (isMod(tags.username)) rushQuitVote(channel)
+    else client.say(channel, `@${tags["display-name"]} can't wait to start over! SeemsGood`)
   } else if (change) {
     client.say(channel, `@${tags["display-name"]} changed their mind and wants to restart ${games[state.currentGame].title} instead.. SeemsGood`)
   } else {
@@ -208,9 +214,12 @@ function voteRestart(channel, tags, message, self) {
 }
 
 function voteExit(channel, tags, message, self) {
-  if (state.state === "playing") {
-    startQuitting(channel)
+  let weight = 1
+  if (isMod(tags.username) && message.toLowerCase().includes(" now")) {
+    weight = 1024
+    rushQuitVote(channel)
   }
+  if (state.state === "playing") startQuitting(channel)
   if (state.state !== "quitting") {
     client.say(channel, `@${tags["display-name"]} type '!vote <game name>' if you want to play something.. BibleThump`)
     return
@@ -218,14 +227,15 @@ function voteExit(channel, tags, message, self) {
   let same = state.quitVoters[tags["display-name"]] === "quit"
   let change = false
   if (state.quitVoters[tags["display-name"]]) {
-    state.quitVotes[state.quitVoters[tags["display-name"]]]--
+    state.quitVotes[state.quitVoters[tags["display-name"]]] -= weight
     change = true
   }
   state.quitVoters[tags["display-name"]] = "quit"
   state.quitVotes[state.quitVoters[tags["display-name"]]] = state.quitVotes[state.quitVoters[tags["display-name"]]] || 0
-  state.quitVotes[state.quitVoters[tags["display-name"]]]++
+  state.quitVotes[state.quitVoters[tags["display-name"]]] += weight
   if (same) {
-    client.say(channel, `@${tags["display-name"]} is so impatient! SeemsGood`)
+    if (isMod(tags.username)) rushQuitVote(channel)
+    else client.say(channel, `@${tags["display-name"]} is so impatient! SeemsGood`)
   } else if (change) {
     client.say(channel, `@${tags["display-name"]} changed their mind and dont't want to play ${games[state.currentGame].title} after all.. SeemsGood`)
   } else {
@@ -234,9 +244,12 @@ function voteExit(channel, tags, message, self) {
 }
 
 function voteStay(channel, tags, message, self) {
-  if (state.state === "playing") {
-    startQuitting(channel)
+  let weight = 1
+  if (isMod(tags.username) && message.toLowerCase().includes(" now")) {
+    weight = 1024
+    rushQuitVote(channel)
   }
+  if (state.state === "playing") startQuitting(channel)
   if (state.state !== "quitting") {
     client.say(channel, `@${tags["display-name"]} type '!vote <game name>' if you want to play something.. BibleThump`)
     return
@@ -244,14 +257,15 @@ function voteStay(channel, tags, message, self) {
   let same = state.quitVoters[tags["display-name"]] === "continue"
   let change = false
   if (state.quitVoters[tags["display-name"]]) {
-    state.quitVotes[state.quitVoters[tags["display-name"]]]--
+    state.quitVotes[state.quitVoters[tags["display-name"]]] -= weight
     change = true
   }
   state.quitVoters[tags["display-name"]] = "continue"
   state.quitVotes[state.quitVoters[tags["display-name"]]] = state.quitVotes[state.quitVoters[tags["display-name"]]] || 0
-  state.quitVotes[state.quitVoters[tags["display-name"]]]++
+  state.quitVotes[state.quitVoters[tags["display-name"]]] += weight
   if (same) {
-    client.say(channel, `@${tags["display-name"]} really likes this game! SeemsGood`)
+    if (isMod(tags.username)) rushQuitVote(channel)
+    else client.say(channel, `@${tags["display-name"]} really likes this game! SeemsGood`)
   } else if (change) {
     client.say(channel, `@${tags["display-name"]} changed their mind and wants to keep playing ${games[state.currentGame].title}.. SeemsGood`)
   } else {
@@ -277,11 +291,12 @@ function joinParty(channel, tags, message, self) {
 }
 
 function startQuitting(channel) {
+  clearTimeout(voteTO)
   state.state = "quitting"
   setTimeout(() => {
     client.say(channel, `Anyone else? Type '!exit', '!restart' or '!stay' in chat to vote! You now have ${state.quitVoteTime} seconds to vote!`)
   }, 1024)
-  setTimeout(() => {
+  voteTO = setTimeout(() => {
     let bestChoices = ["quit"]
     let bestVotes = 0
     for (let candidate in state.quitVotes) {
@@ -309,13 +324,15 @@ function startQuitting(channel) {
     }
     state.quitVotes = {}
     state.quitVoters = {}
+    state.quitVoteTime = 60
   }, 1000 * state.quitVoteTime)
 }
 function startVoting(channel) {
+  clearTimeout(voteTO)
   state.state = "voting"
   // client.say(channel, `Type '!list' to see a list of all available games. Read more about each game at https://www.jackboxgames.com/games/`)
   client.say(channel, `Type '!vote <game title>' to vote for a Jackbox game to play! You have ${state.gameVoteTime} seconds left to vote, if you haven't already!`)
-  setTimeout(() => {
+  voteTO = setTimeout(() => {
     let bestGames = []
     let bestVotes = 0
     for (let game in games) {
@@ -355,6 +372,10 @@ function startVoting(channel) {
     state.chatters = []
     state.gameVoteTime = 60
   }, 1000 * state.gameVoteTime)
+}
+function rushQuitVote(channel) {
+  state.quitVoteTime = 1
+  startQuitting(channel)
 }
 
 setInterval(() => {
@@ -404,6 +425,15 @@ function thisParty() {
   let hour = now.getHours()
   state.parties[hour] = state.parties[hour] || []
   return state.parties[hour]
+}
+
+function isMod(username) {
+  if (username.toLowerCase() === config.identity.username.toLowerCase()) return true
+  config.mods = config.mods || []
+  for (let mod of config.mods) {
+    if (mod.toLowerCase() === username.toLowerCase()) return true
+  }
+  return false
 }
 
 async function getStreamers(game = "Jackbox Party Packs") {
