@@ -20,6 +20,7 @@ setInterval(() => {
   if (!fetching) {
     fetching = true
     fetch("./state.json").then(resp => {
+      fetching = false
       if (resp.status !== 200) {
         history.back()
         setTimeout(() => {
@@ -27,7 +28,6 @@ setInterval(() => {
         }, 4096)
       }
       resp.json().then(state => {
-        fetching = false
         tick(state)
       })
     }).catch(err => {
