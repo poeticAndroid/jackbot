@@ -41,7 +41,7 @@ client.on('message', (channel, tags, message, self) => {
   clearTimeout(loneliness)
   loneliness = setInterval(() => {
     lonely(channel)
-  }, 1000 * 60 * 15)
+  }, 1000 * 60 * 1)
   if (!state.chatters.includes(tags["display-name"])) {
     state.chatters.push(tags["display-name"])
   }
@@ -355,6 +355,14 @@ function startVoting(channel) {
     process.exec(`start ./jackman.ahk start ${games[bestGame].pack} ${games[bestGame].game}`)
     state.state = "playing"
     setTimeout(() => {
+      process.exec(`start ./snip.ahk 0 0 100 100`)
+      setTimeout(() => {
+        const fs = require("fs")
+        fs.renameSync("snip.png", "snips/" + bestGame + ".png")
+        for (let i = 0; i < 100; i++) {
+          state.chatters.push("user" + i)
+        }
+      }, 1024)
       if (games[bestGame].playersMin > 1) {
         client.say(channel, `At least ${games[bestGame].playersMin} players are needed for ${games[bestGame].title}.. Invite some friends to the stream and have fun! PartyHat`)
       } else {
