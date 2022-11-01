@@ -384,10 +384,8 @@ setInterval(() => {
   }
 }, 4096)
 function lonely(channel) {
-  client.say(config.channels[0], `Is anyone there? type '!stay' in chat to keep playing!`)
-  if (state.state === "playing") {
-    startQuitting(config.channels[0])
-  }
+  client.say(channel, `Is anyone there? type '!stay' in chat to keep playing!`)
+  if (state.state === "playing") startQuitting(channel)
 }
 
 function resolveGame(words) {
