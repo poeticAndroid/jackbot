@@ -27,8 +27,8 @@ setInterval(() => {
         }, 4096)
       }
       resp.json().then(state => {
-        tick(state)
         fetching = false
+        tick(state)
       })
     }).catch(err => {
       history.back()
