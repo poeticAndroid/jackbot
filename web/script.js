@@ -50,7 +50,7 @@ function tick(_state) {
 
   updateQuitVotes(state.quitVotes, state.state === "quitting", state.quitVoteTime)
   updateGameVotes(state.gameVotes, state.state === "voting", state.gameVoteTime)
-  updatePartyTicker(state.parties)
+  // updatePartyTicker(state.parties)
 
   let radio = document.querySelector("#radioSnd")
   if (state.state === "voting") {

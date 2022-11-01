@@ -80,7 +80,7 @@ client.on('message', (channel, tags, message, self) => {
         client.say(channel, `!list - List all available games and number of players required.`)
         client.say(channel, `!vote <game title> - Vote on a Jackbox game to play.`)
         client.say(channel, `!exit/!restart/!stay - vote for ending/restarting/keep playing the current game.`)
-        client.say(channel, `!party - Promise to be back here in ${minutesLeft} minutes for the next party!`)
+        // client.say(channel, `!party - Promise to be back here in ${minutesLeft} minutes for the next party!`)
         client.say(channel, `!src - Link to source on Github.`)
         break
 
