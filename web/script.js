@@ -1,4 +1,4 @@
-let state
+let state, fetching
 let hands = ["✊", "👍", "🤘", "🤟", "✋", "🖐", "🖖", "👏", "🙏", "🙌"]
 let music = [
   "./music/AuditoryCheesecake_DressForIt.mp3",
@@ -17,22 +17,26 @@ let partyGifs = []
 refillGifs()
 
 setInterval(() => {
-  fetch("./state.json").then(resp => {
-    if (resp.status !== 200) {
+  if (!fetching) {
+    fetching = true
+    fetch("./state.json").then(resp => {
+      if (resp.status !== 200) {
+        history.back()
+        setTimeout(() => {
+          location.reload(true)
+        }, 4096)
+      }
+      resp.json().then(state => {
+        tick(state)
+        fetching = false
+      })
+    }).catch(err => {
       history.back()
       setTimeout(() => {
         location.reload(true)
       }, 4096)
-    }
-    resp.json().then(state => {
-      tick(state)
     })
-  }).catch(err => {
-    history.back()
-    setTimeout(() => {
-      location.reload(true)
-    }, 4096)
-  })
+  }
 }, 1000)
 setInterval(updatePartyGuest, 8192)
 addEventListener("click", e => {
