@@ -19,11 +19,11 @@ refillGifs()
 setInterval(() => {
   if (!fetching) {
     fetching = true
+    clearTimeout(patience)
     let patience = setTimeout(() => {
       fetching = false
     }, 1024 * 8)
     fetch("./state.json").then(resp => {
-      clearTimeout(patience)
       fetching = false
       if (resp.status !== 200) {
         history.back()
