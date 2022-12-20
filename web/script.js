@@ -200,7 +200,7 @@ function refillGifs() {
       while (respJson?.data?.length) {
         partyGifs.splice(Math.floor(Math.random() * partyGifs.length), 0, respJson.data.pop().images.downsized_medium.url)
       }
-      if (partyGifs.length) el.querySelector("img").src = partyGifs.pop()
+      //if (partyGifs.length) el.querySelector("img").src = partyGifs.pop()
     })
   })
 }
