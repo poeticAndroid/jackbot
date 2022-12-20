@@ -1,4 +1,4 @@
-let state, fetching
+let state, fetching, patience
 let hands = ["✊", "👍", "🤘", "🤟", "✋", "🖐", "🖖", "👏", "🙏", "🙌"]
 let music = [
   "./music/AuditoryCheesecake_DressForIt.mp3",
@@ -20,7 +20,7 @@ setInterval(() => {
   if (!fetching) {
     fetching = true
     clearTimeout(patience)
-    let patience = setTimeout(() => {
+    patience = setTimeout(() => {
       fetching = false
     }, 1024 * 8)
     fetch("./state.json").then(resp => {
