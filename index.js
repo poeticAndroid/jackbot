@@ -58,6 +58,10 @@ client.on('message', (channel, tags, message, self) => {
       cmd[0] = "!" + cmd[0]
     }
     switch (cmd[0]) {
+      case "!crash":
+        if (isMod(tags.username)) throw "crash!"
+        break
+
       case "!hello":
         client.say(channel, `@${tags["display-name"]} greetings! HeyGuys`)
         break
