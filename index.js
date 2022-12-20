@@ -59,7 +59,10 @@ client.on('message', (channel, tags, message, self) => {
     }
     switch (cmd[0]) {
       case "!crash":
-        if (isMod(tags.username)) throw "crash!"
+        if (isMod(tags.username)) {
+          client.say(channel, `@${tags["display-name"]} just tripped over a wire and crashed the server!`)
+          throw "crash!"
+        }
         break
 
       case "!hello":

@@ -10,4 +10,5 @@ echo starting Twitch bot ...
 call node index.js
 echo:
 echo Restarting
+start ./jackman.ahk exit
 shutdown /r
