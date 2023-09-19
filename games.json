@@ -41,6 +41,13 @@
     "playersMin": 3,
     "playersMax": 8
   },
+  "devi": {
+    "title": "Devils and the Details",
+    "pack": 7,
+    "game": 2,
+    "playersMin": 3,
+    "playersMax": 8
+  },
   "dict": {
     "title": "Dictionarium",
     "pack": 6,
@@ -91,6 +98,13 @@
     "playersMin": 2,
     "playersMax": 8
   },
+  "fib4": {
+    "title": "Fibbage 4",
+    "pack": 9,
+    "game": 1,
+    "playersMin": 2,
+    "playersMax": 8
+  },
   "fixl": {
     "title": "Fibbage XL",
     "pack": 1,
@@ -119,6 +133,13 @@
     "playersMin": 3,
     "playersMax": 8
   },
+  "junk": {
+    "title": "Junktopia",
+    "pack": 9,
+    "game": 3,
+    "playersMin": 3,
+    "playersMax": 8
+  },
   "lies": {
     "title": "Lie Swatter",
     "pack": 1,
@@ -140,12 +161,26 @@
     "playersMin": 3,
     "playersMax": 7
   },
+  "nons": {
+    "title": "Nonsensory",
+    "pack": 9,
+    "game": 4,
+    "playersMin": 3,
+    "playersMax": 8
+  },
   "pate": {
     "title": "Patently Stupid",
     "pack": 5,
     "game": 5,
     "playersMin": 3,
     "playersMax": 8
+  },
+  "poll": {
+    "title": "Poll Mine",
+    "pack": 8,
+    "game": 4,
+    "playersMin": 2,
+    "playersMax": 10
   },
   "push": {
     "title": "Push The Button",
@@ -175,12 +210,26 @@
     "playersMin": 3,
     "playersMax": 8
   },
+  "quix": {
+    "title": "Quixort",
+    "pack": 9,
+    "game": 5,
+    "playersMin": 2,
+    "playersMax": 10
+  },
   "role": {
     "title": "Role Models",
     "pack": 6,
     "game": 2,
     "playersMin": 3,
     "playersMax": 6
+  },
+  "room": {
+    "title": "Roomerang",
+    "pack": 9,
+    "game": 2,
+    "playersMin": 4,
+    "playersMax": 9
   },
   "spli": {
     "title": "Split The Room",
@@ -210,27 +259,6 @@
     "playersMin": 3,
     "playersMax": 8
   },
-  "devi": {
-    "title": "The Devils and the Details",
-    "pack": 7,
-    "game": 2,
-    "playersMin": 3,
-    "playersMax": 8
-  },
-  "poll": {
-    "title": "The Poll Mine",
-    "pack": 8,
-    "game": 4,
-    "playersMin": 2,
-    "playersMax": 10
-  },
-  "whee": {
-    "title": "The Wheel of Enormous Proportions",
-    "pack": 8,
-    "game": 2,
-    "playersMin": 2,
-    "playersMax": 8
-  },
   "triv": {
     "title": "Trivia Murder Party 1",
     "pack": 3,
@@ -250,6 +278,13 @@
     "pack": 8,
     "game": 5,
     "playersMin": 4,
+    "playersMax": 8
+  },
+  "whee": {
+    "title": "Wheel of Enormous Proportions",
+    "pack": 8,
+    "game": 2,
+    "playersMin": 2,
     "playersMax": 8
   },
   "word": {
@@ -280,40 +315,5 @@
     "playersMin": 1,
     "playersMax": 6,
     "lowLatency": true
-  },
-  "fib4": {
-    "title": "Fibbage 4",
-    "pack": 9,
-    "game": 1,
-    "playersMin": 2,
-    "playersMax": 8
-  },
-  "room": {
-    "title": "Roomerang",
-    "pack": 9,
-    "game": 2,
-    "playersMin": 4,
-    "playersMax": 9
-  },
-  "junk": {
-    "title": "Junktopia",
-    "pack": 9,
-    "game": 3,
-    "playersMin": 3,
-    "playersMax": 8
-  },
-  "nons": {
-    "title": "Nonsensory",
-    "pack": 9,
-    "game": 4,
-    "playersMin": 3,
-    "playersMax": 8
-  },
-  "quix": {
-    "title": "Quixort",
-    "pack": 9,
-    "game": 5,
-    "playersMin": 2,
-    "playersMax": 10
   }
 }
