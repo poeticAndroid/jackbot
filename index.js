@@ -73,6 +73,12 @@ client.on('message', (channel, tags, message, self) => {
         client.say(channel, `@${tags["display-name"]} congratulations! You found the secret command! Use it responsibly PowerUpL MingLee PowerUpR`)
         break
 
+      case "!music":
+        if (isMod(tags.username)) {
+          client.say(channel, `/raid @relaxbeats`)
+        }
+        break
+
       case "!streamers":
         if (!chilled) getStreamers().then(streamers => {
           client.say(channel, streamers.join(", "))
