@@ -75,7 +75,7 @@ client.on('message', (channel, tags, message, self) => {
 
       case "!music":
         if (isMod(tags.username)) {
-          client.say(channel, `/raid @relaxbeats`)
+          client.say(channel, `/raid relaxbeats`)
         }
         break
 
